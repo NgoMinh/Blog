@@ -1,0 +1,7 @@
+parameters:
+#    wn_backend.example.class: Wn\BackendBundle\Example
+
+services:
+#    wn_backend.example:
+#        class: %wn_backend.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

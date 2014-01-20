@@ -1,0 +1,79 @@
+{% extends "WnBlogBundle::layout.html.twig" %}
+
+{% block nav %}
+	{{ render(controller("WnBlogBundle:Article:menu")) }}
+{% endblock nav %}
+
+{% block container %}
+{% stylesheets '@WnBlogBundle/Resources/public/css/article.css'
+			   '@WnBlogBundle/Resources/public/css/commentaires.css'
+			   '@WnBlogBundle/Resources/public/css/connexion.css'
+			   '@WnBlogBundle/Resources/public/css/menu.css' %}
+	<link rel="stylesheet" href="{{asset_url}}" />
+{% endstylesheets %}
+<div id="container">
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#container').imagesLoaded(function(){
+				$('#container').masonry({
+					itemSelector : '.element',
+					gutter : 2,
+				});
+				$('#container').masonry('layout');
+			});
+		});
+	</script>
+	<div class="element element-antibug"></div>
+	<div class="article element">
+		<div class="fiche"><span class="text">Article écrit par <a class="auteur" href="{{path('wn_blog_utilisateur',{'id':article.auteur.id})}}"><i>{{article.auteur.username}}</i></a> le <i>{{ article.datePublication | date('d-m-y')}}</i><span></div>
+		<h1 class="titre">{{ article.titre }}</h1>
+		<div class="synopsis">{{ article.synopsis }}</div>
+		<div class="contenu">{{ article.contenu | raw}}</div>
+		<div class="border-bottom"></div>
+		<div class="border-top"></div>
+	</div><!-- article -->
+
+	<div class="commentaires element">
+		<div class="ban"><span class="text">Commentaire</span></div>
+		{# Formulaire pour mettre un commentaire #}
+		<form method="post" {{ form_enctype(form)}}>
+			{{ form_errors(form) }}
+			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+				{{ form_widget(form.contenu, {'attr':{'placeholder' : 'Entrer votre commentaire ici.'} }) }}
+			{% else %}
+				{{ form_widget(form.contenu, {'attr':{'placeholder' : 'Veuillez vous connecter pour écrire un commentaire sur cette article.', 'disabled' : 'disabled'} }) }}
+			{% endif %}
+				{{ form_rest(form) }}
+			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+				<input type="submit" value="Envoyer"/>
+			{% else %}
+				<input type="submit" value="Envoyer" disabled />
+			{% endif %}
+		</form>
+		
+
+		{# Liste des commentaires #}
+		{% if commentaires|length == 0 %}
+		<div class="ban ban-0commentaire">
+			<span class="text">Cette article n'a pas encore été commenté</span>
+		</div>
+		{% endif %}
+		{% for commentaire in commentaires %}
+		<div class="commentaire">
+			<div class="auteur">
+				<div class="triangle">
+					<div class="triangle-bleu"></div>
+					<div class="triangle-blanc"></div>
+				</div>
+				<span class="icon-user avatar"></span>
+				<a href="{{ path('wn_blog_utilisateur',{'id':commentaire.auteur.id}) }}" class="pseudo">{{ commentaire.auteur.username }}</a>
+			</div>
+			<div class="contenu">
+				<p>{{ commentaire.contenu }}</p>
+			</div>
+		</div><!-- commentaire -->
+		{% endfor %}
+	</div><!-- commentaires -->
+
+</div><!-- container -->
+{% endblock container %}

@@ -1,0 +1,140 @@
+.container{
+	padding-left   : 40px;
+	display        : inline-block;
+	vertical-align : top;
+	overflow       : hidden;
+	color          : #333333;
+}
+
+
+
+.nav{
+	display        : inline-block;
+	color          : white;
+	vertical-align : top;
+	background     : #484848;
+}
+
+.nav a{
+	display         : block;
+	width           : 100%;
+	color           : #d9d9d9;
+	text-decoration : none;
+	line-height     : 35px;
+}
+
+.nav a span{
+	padding : 3px;
+	margin-right : 6px;
+	border  : 2px solid #d9d9d9;
+	border-radius: 3px;
+}
+
+.nav ul .option{
+	background : #484848;
+	transition:
+		background 0.2s ease;
+}
+
+.nav ul .option:hover{
+	background : #dddddd;
+	transition:
+		background 0.2s ease;
+}
+
+.nav ul .option:hover a{
+	color : #333333;
+	transition : 
+		color      0.2s ease;
+}
+
+.nav ul .option:hover a span{
+	border: 2px solid #333333;
+	transition :
+		border 0.2 ease;
+}
+
+.nav ul{
+	list-style    : none;
+	margin        : 0;
+	margin-top    : 100px;
+	padding       : 0;
+	width         : 180px;
+	height        : 100%;
+	background     : #484848;
+	font-weight: 500;
+}
+
+.nav li{
+	padding-left   : 15px;
+	border-bottom  : 1px solid #3f3f3f; 
+}
+
+.nav .sous-menu{
+	margin-top     : 70px;
+	padding-left   : 26px; 
+	padding-top    : 5px;
+	padding-bottom : 5px;
+	background     : #383838;
+}
+
+.nav li:first-child{
+	border-top : 1px solid #3f3f3f;
+}
+
+body{
+	margin  : 0;
+	padding : 0;
+	background : #f1f1f1;
+}
+
+html,
+body,
+.container,
+.nav{
+	font-family: 'Lato',Arial, sans-serif;
+}
+
+.btn{
+	position        : relative;
+	display         : inline-block;
+	font-family     : calibri;
+	font-weight     : 600;  
+	line-height     : 30px;
+	background      : #252e88;
+	letter-spacing  : 2px;
+	text-decoration : none;
+	color           : white;
+	padding         : 3px 25px;
+}
+
+.form-label{
+	display : inline-block;
+}
+
+.form-input{
+	display : inline-block; 
+}
+
+.tab-list tbody tr th{
+	text-align : left;
+	border-right : 1px solid black;
+}
+
+.tab-list{
+	border-collapse: collapse;
+	border : 1px solid black;
+}
+
+.tab-list thead tr th{
+	border-right  : 1px solid black;
+	border-bottom : 1px solid black;
+}
+
+table .pair{
+	background : #b6bdff;
+}
+
+table .impair{
+	background : #9da6fc;
+}

@@ -1,0 +1,12 @@
+{% extends "WnBackendBundle::layout.html.twig" %}
+{% block body %}
+<form action="{{ path("fos_user_security_check") }}" method="post">
+	<label for="username">Login</label>
+	<input type="text" id="username" name="_username"  required="required" />
+	<label for="password">Password</label>
+	<input type="password" id="password" name="_password" required="required" />
+	<label for="remember_me">
+	<input type="checkbox" id="remember_me" name="_remember_me" value="on" /> Remember me</label>
+	<button type="submit" id="_submit" >{{ "security.login.submit"|trans({}, "FOSUserBundle")}}</button>
+</form>
+{% endblock body %}

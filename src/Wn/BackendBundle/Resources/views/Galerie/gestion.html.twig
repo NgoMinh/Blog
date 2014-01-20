@@ -1,0 +1,38 @@
+{% extends "WnBackendBundle::layout.html.twig" %}
+
+{% block title %}Gestion de la galerie{% endblock %}
+
+{% block body %}
+<h3>Gestion de la galerie</h3>
+<a href="{{ path('wn_backend_galerie_ajouter_element') }}">ajouter</a>
+<table>
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Image</th>
+			<th>Note</th>
+			<th>Date d'ajout</th>
+			<th></th>
+		</tr>
+	<thead>
+	<tbody>
+		{% for image in galerie.elements %}
+		<tr>
+			<td>
+				<a href="{{ path('wn_backend_galerie_modifier_element',{'id':image.id}) }}">
+					{{image.id}}
+				</a>
+			</td>
+			<td><img src="{{ asset(image.WebPath) }}" style="width:50px;height:50px;"/></td>
+			<td>{{ image.note }}</td>
+			<td>{{ image.datePublication | date('d/m/Y')}}</td>
+			<td>
+				<a href="{{ path('wn_backend_galerie_supprimer_element', {'id': image.id}) }}">
+					supprimer
+				</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}

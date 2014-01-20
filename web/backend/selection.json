@@ -1,0 +1,169 @@
+{
+	"IcoMoonType": "selection",
+	"icons": [
+		{
+			"icon": {
+				"paths": [
+					"M896 256v-128h-896v704c0 35.346 28.654 64 64 64h864c53.022 0 96-42.978 96-96v-544h-128zM832 832h-768v-640h768v640zM128 320h640v64h-640zM512 448h256v64h-256zM512 576h256v64h-256zM512 704h192v64h-192zM128 448h320v320h-320z"
+				],
+				"tags": [
+					"newspaper",
+					"paper"
+				],
+				"grid": 16
+			},
+			"properties": {
+				"order": 1,
+				"id": 5,
+				"prevSize": 32,
+				"code": 58880,
+				"name": "newspaper",
+				"ligatures": ""
+			}
+		},
+		{
+			"icon": {
+				"paths": [
+					"M896 128v832h-672c-53.022 0-96-42.98-96-96 0-53.018 42.978-96 96-96h608v-768h-640c-70.398 0-128 57.6-128 128v768c0 70.4 57.602 128 128 128h768v-896h-64zM256 832h576v64h-576z"
+				],
+				"tags": [
+					"book",
+					"reading"
+				],
+				"grid": 16
+			},
+			"properties": {
+				"order": 2,
+				"id": 32,
+				"prevSize": 32,
+				"code": 58881,
+				"name": "book",
+				"ligatures": ""
+			}
+		},
+		{
+			"icon": {
+				"paths": [
+					"M1024 590.444l-512-397.426-512 397.428v-162.038l512-397.426 512 397.428zM896 576v384h-256v-256h-256v256h-256v-384l384-288z"
+				],
+				"tags": [
+					"home",
+					"house",
+					"building"
+				],
+				"grid": 16
+			},
+			"properties": {
+				"order": 3,
+				"id": 1,
+				"prevSize": 32,
+				"code": 58882,
+				"name": "home",
+				"ligatures": ""
+			}
+		},
+		{
+			"icon": {
+				"paths": [
+					"M512 64c282.77 0 512 186.25 512 416 0 229.752-229.23 416-512 416-27.156 0-53.81-1.734-79.824-5.044-109.978 109.978-241.25 129.7-368.176 132.596v-26.916c68.536-33.578 128-94.74 128-164.636 0-9.754-0.758-19.33-2.164-28.696-115.796-76.264-189.836-192.754-189.836-323.304 0-229.75 229.23-416 512-416z"
+				],
+				"tags": [
+					"bubble",
+					"comment",
+					"chat",
+					"talk"
+				],
+				"grid": 16
+			},
+			"properties": {
+				"order": 4,
+				"id": 107,
+				"prevSize": 32,
+				"code": 58883,
+				"name": "bubble",
+				"ligatures": ""
+			}
+		},
+		{
+			"icon": {
+				"paths": [
+					"M320 192c0-106.039 85.961-192 192-192 106.039 0 192 85.961 192 192 0 106.039-85.961 192-192 192-106.039 0-192-85.961-192-192zM768.078 448h-35.424l-199.104 404.244 74.45-372.244-96-96-96 96 74.45 372.244-199.102-404.244h-35.424c-127.924 0-127.924 85.986-127.924 192v320h768v-320c0-106.014 0-192-127.922-192z"
+				],
+				"tags": [
+					"user",
+					"profile",
+					"avatar",
+					"person",
+					"talk",
+					"member",
+					"employee",
+					"job",
+					"official"
+				],
+				"grid": 16
+			},
+			"properties": {
+				"order": 5,
+				"id": 118,
+				"prevSize": 32,
+				"code": 58884,
+				"name": "user",
+				"ligatures": ""
+			}
+		},
+		{
+			"icon": {
+				"paths": [
+					"M128 256v640h896v-640h-896zM960 789.334l-128-213.334-145.066 120.888-110.934-184.888-384 320v-512h768v469.334zM256 480c0-53.019 42.981-96 96-96s96 42.981 96 96c0 53.019-42.981 96-96 96-53.019 0-96-42.981-96-96zM896 128h-896v640h64v-576h832z"
+				],
+				"tags": [
+					"images",
+					"pictures",
+					"photos",
+					"graphics"
+				],
+				"grid": 16
+			},
+			"properties": {
+				"order": 6,
+				"id": 15,
+				"prevSize": 32,
+				"code": 58885,
+				"name": "images",
+				"ligatures": ""
+			}
+		}
+	],
+	"height": 1024,
+	"metadata": {},
+	"preferences": {
+		"fontPref": {
+			"prefix": "icon-",
+			"metadata": {},
+			"showGlyphs": true,
+			"metrics": {
+				"emSize": 1024,
+				"baseline": 6.25,
+				"whitespace": 50
+			},
+			"resetPoint": 58880,
+			"showQuickUse": true,
+			"quickUsageToken": false,
+			"showMetrics": true,
+			"showMetadata": false
+		},
+		"imagePref": {
+			"color": 0,
+			"height": 32,
+			"columns": 16,
+			"margin": 16,
+			"png": false,
+			"sprites": true
+		},
+		"historySize": 100,
+		"showCodes": true,
+		"gridSize": 16,
+		"showLiga": false,
+		"showGrid": true
+	}
+}

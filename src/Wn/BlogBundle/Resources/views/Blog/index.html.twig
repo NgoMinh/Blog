@@ -1,0 +1,180 @@
+{% extends "WnBlogBundle::layout.html.twig" %}
+{% block title %}Homepage{% endblock %}
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function(){
+	var container = $('#container');
+
+	$('#container').imagesLoaded(function(){
+		var type_element_request = "all";
+		var element_start_at     = 20;
+		var nb_element_request   = 1;
+		$('#container').masonry({
+			itemSelector : '.element',
+			gutter : 2
+		});
+
+
+		var blogLink = $("nav a:contains('Blog Perso')");
+		blogLink.click(function (event){
+			event.preventDefault();
+			updateNav($(this));
+			var $elements = $('.element');
+			$elements.removeClass("element-hide");
+			$("#container").masonry('layout');
+			type_element_request = "all";
+		});
+
+		var galerieLink = $("nav a:contains('Galerie')");
+		galerieLink.click(function (event){
+			event.preventDefault();
+			updateNav($(this));
+			var $imageElement = $('.element-image');
+			var $otherElement = $('.element').not('.element-image').not('.element-antibug');
+			$otherElement.addClass('element-hide');
+			$imageElement.removeClass('element-hide');
+			$('#container').masonry('layout');
+			type_element_request = ('Galerie');
+		});
+
+		var model3DLink = $("nav a:contains('Model 3D')");
+		model3DLink.click(function (event){
+			event.preventDefault();
+			updateNav($(this));
+			var $modelElement = $('.element-model3D');
+			var $otherElement = $('.element').not('.element-model3D').not('.element-antibug');
+			$otherElement.addClass('element-hide');
+			$modelElement.removeClass('element-hide');
+			$('#container').masonry('layout');
+			type_element_request = ('Model 3D');
+		});
+
+		function updateNav(link){
+			$('nav a[class="actif"]').removeClass("actif");
+			link.addClass("actif");
+		}
+
+		{% for categorie in categories %}
+		$("nav a:contains('{{categorie.nom}}')").click(function (event){
+			event.preventDefault();
+			updateNav($(this));
+			var $categorieElement = $('.categorie-{{categorie.nom}}');
+			var $otherElement     = $('.element').not('.categorie-{{categorie.nom}}').not('.element-antibug');
+			$otherElement.addClass('element-hide');
+			$categorieElement.removeClass('element-hide');
+			$('#container').masonry('layout');
+			type_element_request = "{{categorie.nom}}";
+		});
+		{% endfor %}
+
+		$(window).scroll(infiniteScrollEvent);
+
+		{% if app.request.get('categorie') is null %}
+			$("nav a:contains('Blog Perso')").trigger('click');
+		{% else %}
+			$("nav a:contains('{{app.request.get('categorie')}}')").trigger('click');
+		{% endif %}
+
+		$(window).resize(function(){
+			$("#container").masonry('layout');
+		});
+
+		function infiniteScrollEvent(){
+			if($(window).scrollTop() + $(window).height() == $(document).height()){
+				$('.loader').css('visibility','visible');
+				switch(type_element_request)
+				{
+					case "all":
+						console.log(type_element_request);
+						console.log($('.element').not('.element-antibug').length);
+						element_start_at = $('.element').not('.element-antibug').length;
+						break;
+					case "Galerie":
+						console.log(type_element_request);
+						console.log($('.element-image').length);
+						element_start_at = $('.element-image').length;
+						break;
+					case "Model 3D":
+						console.log(type_element_request);
+						console.log($('.element-model3D').length);
+						element_start_at = $('.element-model3D').length;
+						break;
+					{% for categorie in categories %}
+					case "{{categorie.nom}}":
+						console.log("{{categorie.nom}}");
+						console.log($('.categorie-{{categorie.nom}}').length);
+						element_start_at = $('.categorie-{{categorie.nom}}').length;
+						break;
+					{% endfor %}
+				}
+				$.ajax({
+					type: "POST",
+					url: "{{ path('wn_blog_index_element') }}",
+					cache: false,
+					data: {
+						"categorie"  : type_element_request,
+						"startAt"    : element_start_at,
+						"maxElement" : nb_element_request,
+					},
+					dataType: 'html',
+					beforeSend : function(){
+						$(window).off("scroll");
+					},
+					success: function(data){
+						var $html = $( data );
+						$("#container").append($html).masonry( 'appended', $html, true ).masonry('layout',$html);
+						$("#container").masonry('layout');
+						$('.loader').css('visibility','hidden');
+						if(data == ''){
+							console.log('ding');
+						}
+						$(window).on("scroll",infiniteScrollEvent);
+					},
+					error: function(data){
+						$('.loader').css('visibility','hidden');
+						console.log("Erreur");
+						$(window).on("scroll",infiniteScrollEvent);
+					}
+				});
+			}
+		}
+	});
+	
+
+});
+</script>
+{% javascripts "@WnBlogBundle/Resources/public/jquery-ui/js/jquery-ui-1.10.3.custom.js" %}
+	<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock javascript %}
+{% block css %}
+{% stylesheets  "@WnBlogBundle/Resources/public/css/index.css"
+				"@WnBlogBundle/Resources/public/css/loader.css"
+				"@WnBlogBundle/Resources/public/css/articleIndexElement.css"
+				"@WnModel3DBundle/Resources/public/css/elementIndex.css"
+				"@WnGalerieBundle/Resources/public/css/imageIndexElement.css"
+				"@WnBlogBundle/Resources/public/css/connexion.css" %}
+	<link rel="stylesheet" type="text/css" href="{{asset_url}}">
+{% endstylesheets%}
+{% endblock css%}
+{% block container %}
+
+<div id="container">
+	<div class="element element-antibug"></div>
+	{% for element in elements %}
+
+		{# Representation des articles #}
+		{% if element is wn_article %}
+			{{ render(controller("WnBlogBundle:Article:elementIndex", {'article' : element })) }}
+		{# Representation des images de la galerie #}
+		{% elseif element is wn_elementGalerie %}
+			{{ render(controller("WnGalerieBundle:ElementGalerie:elementIndex", {'elementGalerie' : element })) }}
+		{# Representation des model3D#}
+		{% elseif element is wn_model3d %}
+			{{ render(controller("WnModel3DBundle:Model3D:elementIndex",{'model': element })) }}
+		{% endif %}
+
+	{% endfor %}
+</div>
+
+{% endblock container %}

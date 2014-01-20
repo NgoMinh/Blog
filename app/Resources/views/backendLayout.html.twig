@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Backend - {% block title %}{% endblock %}</title>
+		<link rel="stylesheet" type="text/css" href="{{ asset('backend/css/backend.css') }}">
+		<script type="text/javascript" src="{{ asset('backend/js/nav.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('jquery-ui/js/jquery-1.9.1.js')}}"></script>
+		<script type="text/javascript" src="{{ asset('jquery-ui/js/jquery-ui-1.10.3.custom.js')}}"></script>
+		<script type="text/javascript" src="{{ asset('mrdoob/build/three.js')}}"></script>
+		<script type="text/javascript" src="{{ asset('mrdoob/examples/js/controls/OrbitControls.js')}}"></script>
+		<script type="text/javascript" src="{{ asset('mrdoob/examples/js/loaders/ColladaLoader.js')}}"></script>
+		<script type="text/javascript" src="{{ asset('ckeditor/ckeditor.js')}}"></script>
+		<script type="text/javascript" src="{{ asset('ckeditor/adapters/jquery.js')}}"></script>
+		<link rel="stylesheet" type="text/css" href="{{ asset('jquery-ui/css/ui-lightness/jquery-ui-1.10.3.custom.css')}}">
+		{% block javascript %}{% endblock javascript %}
+		<style>
+			@font-face{
+				font-weight : normal;
+				font-style  : normal;
+				font-family : 'icomoon';
+				src : url("{{ asset('backend/fonts/icomoon.eot')        }}");
+				src : url("{{ asset('backend/fonts/icomoon.eot?#iefix') }}") format('embedded-opentype'),
+					  url("{{ asset('backend/fonts/icomoon.ttf')        }}") format('truetype'),
+					  url("{{ asset('backend/fonts/icomoon.woff')       }}") format('woff'),
+					  url("{{ asset('backend/fonts/icomoon.svg#icomoon')}}") format('svg'); 
+			}
+
+			[class*="icon-"]{
+				font-family: 'icomoon';
+				speak: none;
+				font-style     : normal;
+				font-weight    : normal;
+				font-variant   : normal;
+				text-transform : none;
+				line-height    : 1;
+
+				-webkit-font-smoothing  : antialiased;
+				-moz-osx-font-smoothing : grayscale;
+			}
+
+			.icon-newspaper:before {
+				content: "\e600";
+			}
+			.icon-book:before {
+				content: "\e601";
+			}
+			.icon-home:before {
+				content: "\e602";
+			}
+			.icon-bubble:before {
+				content: "\e603";
+			}
+			.icon-user:before {
+				content: "\e604";
+			}
+			.icon-images:before {
+				content: "\e605";
+			}
+
+		</style>
+	</head>
+	<body>
+		{{ render(controller('WnBackendBundle:Backend:Menu')) }}
+		<div class="container">
+		{% block body %}
+		{% endblock %}
+		</div>
+	</body>
+</html>

@@ -1,0 +1,102 @@
+{% stylesheets "@WnBlogBundle/Resources/public/css/menu.css" %}
+	<link rel="stylesheet" type="text/css" href="{{asset_url}}">
+{% endstylesheets %}
+<script type="text/javascript">
+	$(document).ready(function (){
+		var $button = $(".burger-button");
+		var $navBar = $(".navigation");
+		var $blockPage = $(".block-page");
+		$blockPage.fadeOut();
+		var hide    = true;
+		var $connexionButton = $(".nav-connexion");
+		var $connexion = $(".connexion");
+		$connexion.fadeOut();
+		$button.click(buttonEvent);
+		$blockPage.click(blockPageEvent);
+		$connexionButton.click(connexionButtonEvent);
+		$(window).resize(function(){
+			console.log($(window).width());
+			if($(window).width() >= 817){
+				$navBar.css('left','0px');
+			}else{
+				$navBar.css('left','-200px');
+			}
+			$blockPage.fadeOut('fast');
+			$connexion.fadeOut('fast');
+			hide = true;
+		});
+
+		function blockPageEvent (){
+			if($(window).width() < 817){
+				$navBar.css('left','-200px');
+				hide = true;
+			}
+			$blockPage.fadeOut();
+			$connexion.fadeOut();
+		}
+
+		function connexionButtonEvent (){
+			$connexion.fadeIn();
+			if($(window).width() < 817){
+				$navBar.css("left","-200px");
+				hide = true;
+			}
+			$blockPage.fadeIn();
+		}
+
+		function buttonEvent (){
+			$connexion.fadeOut();
+			if(hide == true){
+				$navBar.css("left","0px");
+				$blockPage.fadeIn("fast");
+				hide = false;
+			}else{
+				$navBar.css("left","-200px");
+				$blockPage.fadeOut("fast");
+				hide = true;
+			}
+		}
+
+	});
+</script>
+<div class="nav-top">
+	<div class="burger-button">
+		<div class="top segment"></div>
+		<div class="middle segment"></div>
+		<div class="bottom segment"></div>
+	</div>
+</div>
+<div class="block-page">
+</div>
+<div class="connexion">
+	<form action="{{ path("fos_user_security_check") }}" method="post">
+		<div class="group">
+			<label for="username">Login</label>
+			<input type="text" id="username" name="_username"  required="required" />
+		</div>
+		<div class="group">
+			<label for="password">Password</label>
+			<input type="password" id="password" name="_password" required="required" />
+		</div>
+		<div class="group">
+			<label for="remember_me">Remember me</label>
+			<input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+		</div>
+		<button type="submit" id="_submit" >{{ "security.login.submit"|trans({}, "FOSUserBundle")}}</button>
+	</form>
+</div>
+<nav class="navigation">
+	<ul class="list-menu">
+		<li class="menu"><a href="#" class="actif">Blog Perso</a></li>
+		{% for categorie in categories %}
+			<li class="menu"><a href="#" >{{ categorie.nom }}</a></li>
+		{% endfor %}
+		<li class="menu"><a href="#" >Galerie</a></li>
+		<li class="menu"><a href="#" >Model 3D</a></li>
+		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+			<li class="menu"><a href="{{ path('fos_user_security_logout')}}">Deconnexion</a></li>
+		{% else %}
+			<li class="menu"><a href="#" class="nav-connexion">Connexion</a></li>
+		{% endif %}	
+	</ul>
+</nav>

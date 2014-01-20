@@ -1,0 +1,21 @@
+{% javascripts "@WnModel3DBundle/Resources/public/js/ElementModel3D.js"%}
+	<script type="text/javascript" src="{{ asset_url}}"></script>
+{% endjavascripts %}
+<div class="element element-model3D">
+	<div class="slider" id="sliderCamDistance-{{model.id}}"></div>
+	<div id="renderModel-{{model.id}}"><span class="icon-expand"></span></div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var $renderModel  = $('#renderModel-{{model.id}}');
+			$renderModel.myPlugin({
+				"renderWidth"     : 310,
+				"renderHeight"    : 400,
+				"sliderContainer" : $('#sliderCamDistance-{{model.id}}'),
+				"linkModel"       : "{{asset(model.webPath)}}",
+				"minCamDistance"  : {{model.camDistanceMin}},
+				"maxCamDistance"  : {{model.camDistanceMax}}
+			});
+
+		});
+	</script>
+</div>

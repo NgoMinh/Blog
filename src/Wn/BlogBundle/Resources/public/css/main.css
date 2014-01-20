@@ -1,0 +1,83 @@
+html{
+	height : 100%;
+	margin : 0px;
+	padding : 0px;
+}
+
+body{
+	margin      : 0px;
+	padding     : 0px;
+	font-family : 'Lato', sans-serif;
+	height : 100%;
+}
+
+.container{
+	padding        : 0px 2px 0px 2px;
+	margin         : 0px 0px 0px 190px;
+	background     : #314559;
+	min-height     : 100%;
+}
+
+@media screen
+and (max-width: 623px){
+	.container{
+		width : 310px;
+		margin  : 51px auto 0px auto;
+	}
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media screen
+and (min-width : 623px)
+and (max-width : 816px){ /* 190+2+310+2+310+2 */
+  /* Styles */
+	.container{
+		width   : 622px;
+		margin  : 51px auto 0px auto;
+	}
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media screen 
+and (min-width : 817px)
+and (max-width : 1128px){ /* 190+2+310+2+310+2+310+2 */
+	.container{
+		width : 622px;
+	}
+}
+
+/* Desktops and laptops ----------- */
+@media screen 
+and (min-width : 1129px)
+and (max-width : 1450px){
+	.container{
+		width : 934px;
+	}
+}
+
+/* Large screens ----------- */
+@media screen 
+and (min-width : 1451px)
+and (max-width : 1762px){
+	.container{
+		width : 1246px;
+	}
+}
+
+@media screen
+and (min-width : 1763px)
+and (max-width : 2074px){
+	.container{
+		width : 1558px;
+	}
+}
+
+@media screen
+and (min-width : 1820px)
+and (max-width : 2140px){
+	.container{
+		width : 1558px;
+	}
+}
+@import url(http://fonts.googleapis.com/css?family=Lato);
+

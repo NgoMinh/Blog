@@ -1,0 +1,24 @@
+{% extends "WnBackendBundle::layout.html.twig" %}
+
+{% block title %}Gestion des models 3D{% endblock title%}
+
+{% block body %}
+<h3>Gestion des models 3D</h3>
+<hr>
+<a href="{{ path('wn_backend_model_ajouter') }}">Ajouter</a>
+<table>
+	<thead>
+		<tr>
+			<th>Id</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for model in models %}
+		<tr>
+			<td><a href="{{ path('wn_backend_model_config',{'id' : model.id })}}">{{model.id}}</a></td>
+			<td><a href="{{ path('wn_backend_model_config',{'id' : model.id}) }}">supprimer</a></td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock body %}

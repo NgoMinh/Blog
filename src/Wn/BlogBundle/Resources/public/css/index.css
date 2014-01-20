@@ -1,0 +1,32 @@
+.element{
+	width         : 310px;
+	position      : relative;
+	display       : inline-block;
+	margin-top    : 2px;
+	font-size     : 0px;
+}
+
+.element-hide{
+	display : none;
+}
+
+.loader{
+	position      : fixed;
+	left          : 50%;
+	margin-left   : -100px;
+	bottom        : 10px;
+	z-index       : 80;
+	width         : 200px;
+	background    : rgba(80,80,80,0.8);
+}
+
+.element-antibug{
+	padding    : 0px 0px 0px 0px;
+	margin     : 0px 0px 0px 0px;
+	width      : 1px;
+	box-shadow : 0px;
+}
+
+#container{
+	position      : relative;
+}

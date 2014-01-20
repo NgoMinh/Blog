@@ -1,0 +1,11 @@
+parameters:
+#    wn_blog.example.class: Wn\BlogBundle\Example
+
+services:
+#    wn_blog.example:
+#        class: %wn_blog.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    wn_blog.blog_extension:
+        class: Wn\BlogBundle\Twig\BlogExtension
+        tags:
+            - { name: twig.extension }

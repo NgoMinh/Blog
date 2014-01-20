@@ -1,0 +1,22 @@
+<ul>
+	<li><a href="{{ path('wn_backend_index')       }}">Index</a></li>
+	
+	{% if is_granted('ROLE_AUTEUR') %}
+		<li><a href="{{ path('wn_backend_article')     }}">Article</a></li>
+		<li><a href="{{ path('wn_backend_model')       }}">Model 3D</a></li>
+		<li><a href="{{ path('wn_backend_galerie')     }}">Galerie</a></li>
+	{% endif %}
+
+	{% if is_granted('ROLE_MODERATEUR') %}
+		<li><a href="{{ path('wn_backend_commentaire') }}">Commentaire</a></li>
+	{% endif %}
+
+	{% if is_granted('ROLE_ADMIN') %}
+		<li><a href="{{ path('wn_backend_utilisateur') }}">Utilisateur</a></li>
+		<li><a href="{{ path('wn_backend_categorie')   }}">Categorie</a></li>
+	{% endif %}
+	{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+		<li><a href="{{ path('fos_user_security_logout')}}">Deconnexion</a></li>
+	{% endif %}
+
+</ul>

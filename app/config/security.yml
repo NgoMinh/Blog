@@ -1,0 +1,51 @@
+security:
+    encoders:
+        Wn\UserBundle\Entity\User: sha512
+
+    role_hierarchy:
+        ROLE_USER:        [ROLE_USER]
+        ROLE_AUTEUR:      [ROLE_USER]
+        ROLE_MODERATEUR:  [ROLE_USER]
+        ROLE_ADMIN:       [ROLE_AUTEUR, ROLE_MODERATEUR]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        in_memory:
+            memory:
+                users:
+                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        main:
+            id: fos_user.user_provider.username
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main_login:
+            pattern: ^/login$
+            anonymous: true
+        main:
+            pattern:         ^/
+            anonymous:       true
+            provider:        main
+            form_login:
+                login_path:  fos_user_security_login
+                check_path:  fos_user_security_check
+                success_handler : wn_user.service.login_success_handler
+                failure_path: null
+            logout:
+                path:              fos_user_security_logout
+                success_handler  : wn_user.service.logout_success_handler
+            remember_me:
+                key:         %secret%
+
+    access_control:
+        - { path: wn_backend_login,      roles: [IS_AUTHENTICATED_ANONYMOUSLY]}
+        - { path: ^/backend/index,       roles: [ROLE_ADMIN, ROLE_AUTEUR, ROLE_MODERATEUR]}
+        - { path: ^/backend/article,     roles: [ROLE_ADMIN, ROLE_AUTEUR]}
+        - { path: ^/backend/model,       roles: [ROLE_ADMIN, ROLE_AUTEUR]}
+        - { path: ^/backend/galerie,     roles: [ROLE_ADMIN, ROLE_AUTEUR]}
+        - { path: ^/backend/commentaire, roles: [ROLE_ADMIN, ROLE_MODERATEUR]}
+        - { path: ^/backend/categorie,   roles: [ROLE_ADMIN]}

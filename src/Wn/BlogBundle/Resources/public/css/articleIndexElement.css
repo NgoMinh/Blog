@@ -1,0 +1,129 @@
+.element-article{
+	background    : white;
+	border-radius : 1px;
+	color         : #333333;
+}
+
+.element-article .segment-top{
+	padding        : 10px 0px 10px 0px;
+	width          : 100%;
+}
+.element .segment-top .categorie{
+	display        : inline-block;
+	vertical-align : middle;
+	text-align     : left;
+	margin         : 0px 0px 0px 10px;
+	font-size      : 20px;
+	font-weight    : 600;
+}
+
+
+.element-article img{
+	height : 80px;
+	width  : 310px;
+}
+
+.element-article .segment-bottom{
+	width         : 100%;
+}
+
+.element-article .titre h2{
+	margin : 5px 10px 5px 10px;
+}
+
+.element-article .titre a{
+	color           : #333333;
+	text-decoration : none;
+	font-weight     : 600;
+	font-size       : 20px;  
+}
+
+.element-article .synopsis{
+	margin  : 0px 0px 0px 10px;
+	padding : 0px 0px 0px 15px;
+	
+	color     : #5F6F81;
+	font-size : 18px;
+}
+
+.element-article .date-auteur .date{
+	margin-top     : 5px; 
+	padding        : 2px 5px 2px 5px;
+	color          : white;
+	font-size      : 15px;
+	font-weight    : 800;
+	letter-spacing : 1px;
+	background     : #333333;
+}
+
+.inline{
+	vertical-align: top;
+	display: inline-block;
+}
+
+.element-article .segment-bottom .date-auteur{
+	float : right;
+}
+
+.element-article .segment-bottom .auteur{
+	font-size : 10px;
+}
+
+/* Social barre style */
+.element-article .segment-bottom .social{
+	position   : relative;
+	width      : 100%;
+	font-size  : 15px;
+	color      : white;
+}
+
+.element-article .social .commentaire{
+	padding : 2px 5px 2px 5px;
+	margin  : 5px 5px 5px 5px;
+	background : #333333;
+	border     : 3px solid #333333;
+	border-radius: 1000px 1000px 1000px 0px; 
+}
+
+.element-article .segment-bottom .social .commentaire:hover{
+	background : white;
+	color      : #333333;
+	transition: 
+		background 0.5s ease,
+		color 0.5s ease;
+}
+
+.element-article .segment-bottom .social .reseau-sociaux {
+	position : absolute;
+	right    : 5px;
+}
+
+.element-article .segment-bottom .social .reseau-sociaux a{
+	margin          : 5px 0px 5px 0px;
+	padding         : 2px 5px 0px 5px;
+	display         : inline-block;
+	text-decoration : none;
+	color           : white;
+	background      : #333333;
+	font-size       : 19px; 
+	border          : 1px solid #333333;
+	border-radius   : 500px 0px 500px 500px;
+}
+
+.element-article .segment-bottom .social .reseau-sociaux .facebook:hover{
+	background : #2d39af;
+	border     : 1px solid #2d39af;
+}
+
+.element-article .segment-bottom .social .reseau-sociaux .twitter:hover{
+	background : #1cc3dc;
+	border     : 1px solid #1cc3dc;
+}
+
+.element-article .segment-bottom .social .reseau-sociaux a:hover{
+	color      : white;
+	transition : 
+		background 0.5s ease,
+		color 0.5s ease,
+		border-radius 0.5s ease;
+}

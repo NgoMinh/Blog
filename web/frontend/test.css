@@ -1,0 +1,377 @@
+body{
+	margin      : 0px;
+	padding     : 0px;
+	font-family : 'Lato', sans-serif;
+}
+
+.container{
+	width        : 1040px;
+	margin-left  : auto;
+	margin-right : auto;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media screen
+and (max-width : 639px){
+  /* Styles */
+	.container{
+		width : 320px;
+		margin-right : auto;
+		margin-left  : auto;
+	}
+	.nav{
+		width : 320px;
+		margin-right : auto;
+		margin-left  : auto;
+	}
+
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media screen 
+and (min-width : 640px)
+and (max-width : 959px){
+	.container{
+		width : 640px;
+		margin-right : auto;
+		margin-left  : auto;
+	}
+	.nav{
+		width : 640px;
+		margin-right : auto;
+		margin-left  : auto;
+	}
+
+}
+
+/* Desktops and laptops ----------- */
+@media screen 
+and (min-width : 960px)
+and (max-width : 1279px){
+	.container{
+		width : 960px;
+		margin-right : auto;
+		margin-left  : auto;
+	}
+	.nav{
+		width : 960px;
+		margin-right : auto;
+		margin-left  : auto;
+	}
+
+}
+
+/* Large screens ----------- */
+@media screen 
+and (min-width : 1280px)
+and (max-width : 1599px){
+	.container{
+		width : 1280px;
+		margin-right : auto;
+		margin-left  : auto;
+	}
+	.nav{
+		width : 1280px;
+		margin-right : auto;
+		margin-left  : auto;
+	}
+
+}
+
+@media screen
+and (min-width : 1600px)
+and (max-width : 1819px){
+	.container{
+		width : 1600px;
+		margin-right : auto;
+		margin-left  : auto;
+	}
+	.nav{
+		width : 1600px;
+		margin-right : auto;
+		margin-left  : auto;
+	}
+}
+
+@media screen
+and (min-width : 1820px)
+and (max-width : 2140px){
+	.container{
+		width : 1610px;
+		margin-right : auto;
+		margin-left  : auto;
+	}
+	.nav{
+		width : 1610px;
+		margin-right : auto;
+		margin-left  : auto;
+	}
+}
+
+/* Nav Style */
+
+@import url(http://fonts.googleapis.com/css?family=Lato);
+
+nav{
+	padding      : 0px;
+	background   : #303030;
+	font-family  : 'Lato', sans-serif;
+	font-weight  : 800;
+	padding-left : 100px; 
+	border-radius : 8px 8px 0px 0px;
+}
+
+nav ul{
+	list-style-type : none;
+	margin          : 0px;
+	padding         : 0px;
+	word-spacing    : 0px;
+}
+
+nav ul li{
+	display        : inline-block;
+	vertical-align : top;
+	border-right   : 1px solid #444444;
+	margin         : 0px;
+}
+
+nav ul li:first-child{
+	border-left : 1px solid #444444;
+}
+
+.deroulant ul li{
+	display : block;
+}
+
+nav ul li a{
+	text-decoration : none;
+	color           : #6A6A6A;
+	padding-left    : 24px;
+	padding-right   : 24px;
+	line-height     : 39px;
+	transition: 
+		color 1s ease;
+}
+
+nav ul li a[class="actif"]{
+	color : #FFFFFF;
+	transition:
+		color 1s ease;
+}
+
+/* Index Article Style */
+
+.element{
+	width         : 310px;
+	position      : relative;
+	display       : inline-block;
+	padding       : 1px 1px 1px 1px;
+	margin-top    : 5px;
+	font-size     : 0px;
+}
+
+.element-hide{
+	display : none;
+}
+
+.loader{
+	width        : 100%;
+	margin-bottom: 40px;
+}
+
+.element-antibug{
+	padding : 0px 0px 0px 0px;
+	margin  : 0px 0px 0px 0px;
+	width   : 1px;
+	box-shadow: 0px;
+}
+
+.element .segment-top{
+	padding-top    : 2%;
+	padding-bottom : 2%;
+	width          : 100%;
+
+	background     : white;
+	border         : 3px solid white;
+	border-radius  : 2px 2px 0px 0px;
+}
+
+		.element .segment-top .categorie{
+			display        : inline-block;
+			vertical-align : middle;
+			text-align     : left;
+			margin         : 0px 0px 0px 10px;
+			font-size      : 20px;
+			font-weight    : 600;
+		}
+
+
+.element-article img{
+	height : 80px;
+	width  : 316px;
+	box-shadow   : inset 0px 5px 5px 0px; 
+}
+
+.element .segment-bottom{
+	width         : 100%;
+	background    : white;
+	border        : 3px solid white;
+	border-radius : 0px 0px 2px 2px;
+}
+
+.element h2{
+	margin        : 0px;
+	margin-top    : 5px;
+	margin-bottom : 10px;
+	padding       : 0px;
+	font-size     : 28px; 
+	margin-left   : 10px;
+}
+
+.element-image{
+	width         : 315.5px;
+	position      : relative;
+	border        : 0px solid #272822;
+	border-radius : 2px;
+	background    : #272822;
+}
+
+.element-image img{
+	width : 100%;
+	margin-bottom: 40px;
+}
+
+.element-image .titre{
+	padding    : 0px 5px 0px 5px;
+	position : absolute;
+	right : 10px;
+	bottom : 9px;
+
+	font-size   : 18px;
+	font-weight : 600;
+	color       : white;
+	
+	border-radius : 5px;
+	
+}
+
+.element-image .commentaire{
+	text-decoration: none;
+	position    : absolute;
+	bottom      : 8px;
+	left        : 8px;
+	padding     : 2px 4px 2px 4px;
+	border      : 3px solid white;
+	border-radius : 1000px 1000px 1000px 0px;
+	background  : white;
+	color       : #272822;
+	font-size   : 15px;
+	font-weight : 600; 
+}
+	.element-image .commentaire:hover{
+		background : #272822;
+		color      : white;
+		transition : 
+			background 0.5s ease,
+			color      0.5s ease;
+	}
+
+
+.element h2 a{
+	text-decoration : none;
+	color           : #313131;
+}
+
+.element p{
+	margin  : 0px;
+	margin-left: 10px;
+	padding : 0px;
+	padding-bottom: 15px;
+	color : #C0BFA9;
+	font-size: 20px;
+}
+
+.element-article .date-auteur .date{
+	margin-top     : 5px; 
+	padding        : 2px 5px 2px 5px;
+	color          : white;
+	font-size      : 15px;
+	font-weight    : 800;
+	letter-spacing : 1px;
+	background     : #333333;
+}
+
+.inline{
+	vertical-align: top;
+	display: inline-block;
+}
+
+.date-auteur{
+	position : relative;
+	float : right;
+}
+
+
+
+.inline .auteur{
+	font-size: 10px;
+}
+
+	/* Social barre style */
+	.element .social{
+		position   : relative;
+		width      : 100%;
+		font-size  : 15px;
+		color      : white;
+	}
+
+		.element .social .commentaire{
+			padding : 2px 5px 2px 5px;
+			margin  : 5px 5px 5px 5px;
+			background : #333333;
+			border     : 3px solid #333333;
+			border-radius: 1000px 1000px 1000px 0px; 
+		}
+
+		.element .social .commentaire:hover{
+			background : white;
+			color      : #333333;
+			transition: 
+				background 0.5s ease,
+				color 0.5s ease;
+		}
+
+		.element .social .reseau-sociaux {
+			position : absolute;
+			right    : 5px;
+		}
+
+		.element .social .reseau-sociaux a{
+			margin          : 5px 0px 5px 0px;
+			padding         : 2px 5px 0px 5px;
+			display         : inline-block;
+			text-decoration : none;
+			color           : white;
+			background      : #333333;
+			font-size       : 19px; 
+			border          : 1px solid #333333;
+			border-radius   : 500px 0px 500px 500px;
+		}
+
+		.element .social .reseau-sociaux .facebook:hover{
+			background : #2d39af;
+			border     : 1px solid #2d39af;
+		}
+
+		.element .social .reseau-sociaux .twitter:hover{
+			background : #1cc3dc;
+			border     : 1px solid #1cc3dc;
+		}
+
+		.element .social .reseau-sociaux a:hover{
+			color      : white;
+			transition : 
+				background 0.5s ease,
+				color 0.5s ease,
+				border-radius 0.5s ease;
+		}

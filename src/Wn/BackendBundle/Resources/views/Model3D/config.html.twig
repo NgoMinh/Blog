@@ -1,0 +1,137 @@
+{% extends "WnBackendBundle::layout.html.twig" %}
+{% block title %}configuration du model 3D{% endblock title %}
+{% block body %}
+<h3>Configuration de la présentation du model</h3>
+<div class="error"> </div>
+<label for="valeur">Valeur de la distance</label>
+<input type="text" id="valeur">
+<form method="POST" {{form_enctype(form)}}>
+	{{ form_widget(form) }}
+	<input type="submit">
+</form>
+<!--
+<label for="min">Distance Min</label>
+<input type="text" id="min">
+<label for="max">Distance Max</label>
+<input type="text" id="max">
+-->
+<div id="slider-distanceCam" style="width : 200px;"></div>
+<div id="model3D"></div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var $error = $(".error");
+		var $sliderCamDistance = $('#slider-distanceCam');
+		$sliderCamDistance.slider({
+			orientation:"horizontal",
+			range:"min",
+			min: 0,
+			max:200,
+			value: 60,
+			slide : function(event,ui){
+				$("#valeur").val(ui.value);
+				majDistance(ui.value);
+			},
+			change: function(event,ui){
+				$("#valeur").val(ui.value);
+				majDistance(ui.value);
+			}
+		});
+		
+		var $inputMax = $('#wn_model3dbundle_model3dconfigtype_camDistanceMax');
+		var $inputMin = $('#wn_model3dbundle_model3dconfigtype_camDistanceMin');
+		var $inputValeur = $("#valeur");
+
+		$inputMin.change(function(){
+			// on vérifie si la valeur rentré est bien un nombre inférieur à la valeur maximal
+			if(!isNaN(parseInt($inputMin.val()))){
+				if(parseInt($inputMin.val()) <= parseInt($inputMax.val())){
+					$sliderCamDistance.slider( "option", "min", parseInt($inputMin.val())).slider("value", parseInt($inputMin.val()));
+					majDistance($inputMin.val());
+					render();
+					$error.text("");
+				}else{
+					$inputMin.val($sliderCamDistance.slider("option","min"));
+					$error.text("Rentrer un nombre inférieur à la valeur maximum");
+				}
+			}else{
+				$inputMin.val($sliderCamDistance.slider("option","min"));
+				$error.text("Rentrer un nombre");
+			}
+			
+		});
+		$inputMax.change(function(){
+			// on vérifie si la valeur rentré est bien un nombre supérieur à la valeur minimal
+			if(!isNaN(parseInt($inputMax.val()))){
+				if(parseInt($inputMax.val()) >= parseInt($inputMin.val())){
+					$sliderCamDistance.slider( "option", "max", parseInt($inputMax.val())).slider("value", parseInt($inputMax.val()));
+					majDistance($inputMax.val());
+					render();
+					$error.text("");
+				}else{
+					$inputMax.val($sliderCamDistance.slider("option","max"));
+					$error.text("Rentrer un nombre supérieur à la valeur minimum");	
+				}
+			}else{
+				$inputMax.val($sliderCamDistance.slider("option","max"));
+				$error.text("Rentrer un nombre");
+			}
+		});
+		$inputValeur.change(function(){
+			// on vérifie si la valeur rentré est bien un nombre entre la valeur minimal et la valeur maximal
+			if(!isNaN(parseInt($inputValeur.val()))){
+				if(parseInt($inputValeur.val()) >= parseInt($inputMin.val()) 
+					&& parseInt($inputValeur.val()) <= parseInt($inputMax.val())){
+					$sliderCamDistance.slider("value",parseInt($inputValeur.val()));
+					$error.text("");
+				}else{
+					$inputValeur.val($sliderCamDistance.slider("value"));
+					$error.text("Rentrer un nombre entre la valeur minimum et la valeur maximum");
+				}
+			}else{
+				$inputValeur.val($sliderCamDistance.slider("value"));
+				$error.text("Rentrer un nombre");
+			}
+			
+		});
+		$("#valeur").val($sliderCamDistance.slider("value"));
+		$inputMin.val($sliderCamDistance.slider("option","min"));
+		$inputMax.val($sliderCamDistance.slider("option","max"));
+
+		var majDistance = function(distance){
+			controls.minDistance = parseInt(distance);
+			controls.maxDistance = parseInt(distance);
+		}
+
+		// Script model 3D
+		var scene    = new THREE.Scene();
+		var camera   = new THREE.PerspectiveCamera(75, 316/400, 0.1, 1000);
+		var renderer = new THREE.WebGLRenderer();
+		
+		renderer.setSize(316, 400);
+		controls = new THREE.OrbitControls( camera , renderer.domElement );
+		controls.addEventListener( $('.element-model3D'), render );
+		controls.minDistance = parseInt($inputMin.val());
+		controls.maxDistance = parseInt($inputMax.val());
+		$('#model3D').append(renderer.domElement);
+
+		var render = function () {
+			requestAnimationFrame(render);
+			controls.update();
+			renderer.render(scene, camera);
+		};
+
+		loader = new THREE.ColladaLoader();
+		loader.options.convertUpAxis = true;
+		loader.load( "{{asset(model.webPath)}}",function (collada){
+			dae = collada.scene;
+			dae.scale.x = dae.scale.y = dae.scale.z = 2;
+			dae.rotation.x =+ 5;
+			scene.add(dae);
+			camera.lookAt(dae);
+		});
+
+		render();
+	});	
+</script>
+{% endblock body %}

@@ -1,0 +1,25 @@
+.element-model3D{
+	width : 310px;
+	border        : 0px solid #E4E4E4;
+	border-radius : 1px;
+	position      : relative;
+}
+
+.element-model3D span[class*="icon-expand"]{
+	position   : absolute;
+	padding    : 6px;
+	bottom     : 10px;
+	right      : 10px;
+	font-size  : 24px;
+	color      : rgba(255,255,255,0.8);
+	background : rgba(0,0,0,0.2);
+	cursor     : pointer;
+}
+
+.element-model3D .slider{
+	font-size : 10px;
+	width     : 290px;
+	position  : absolute;
+	top       : 4px;
+	left      : 8px;
+}

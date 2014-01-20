@@ -1,0 +1,16 @@
+parameters:
+    wn_user.service.login_success_handler.class  : Wn\UserBundle\Service\LoginSuccessHandler
+    wn_user.service.logout_success_handler.class : Wn\UserBundle\Service\LogoutSuccessHandler
+
+services:
+    wn_user.service.login_success_handler:
+        class:     %wn_user.service.login_success_handler.class%
+        arguments: [@router, @security.context,@service_container]
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }
+
+    wn_user.service.logout_success_handler:
+        class:     %wn_user.service.logout_success_handler.class%
+        arguments: [@router, @service_container]
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }

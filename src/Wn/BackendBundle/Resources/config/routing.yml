@@ -1,0 +1,113 @@
+wn_backend_index:
+    pattern: /index
+    defaults: { _controller: WnBackendBundle:Backend:index }
+
+wn_backend_login:
+    pattern: /login
+    defaults: { _controller: WnBackendBundle:Backend:login }
+
+wn_backend_article:
+    pattern: /article
+    defaults: { _controller: WnBackendBundle:Backend:article }
+
+wn_backend_article_ajouter:
+    pattern: /article/ajouter
+    defaults: { _controller: WnBackendBundle:Article:ajouter }
+
+wn_backend_article_editer:
+    pattern: /article/editer/{id}
+    defaults: { _controller: WnBackendBundle:Article:editer }
+    requirements:
+        id: \d+
+
+wn_backend_article_supprimer:
+    pattern: /article/supprimer/{id}
+    defaults: { _controller: WnBackendBundle:Article:supprimer }
+    requirements:
+        id: \d+
+
+wn_backend_commentaire:
+    pattern: /commentaire
+    defaults: { _controller: WnBackendBundle:Backend:commentaire }
+
+wn_backend_commentaire_censurer:
+    pattern: /commentaire/censurer/{id}
+    defaults: { _controller: WnBackendBundle:Commentaire:censurer }
+    requirements:
+        id: \d+
+
+wn_backend_commentaire_supprimer:
+    pattern: /commentaire/supprimer/{id}
+    defaults: { _controller: WnBackendBundle:Commentaire:supprimer }
+    requirements:
+        id: \d+
+
+wn_backend_galerie:
+    pattern: /galerie
+    defaults: { _controller: WnBackendBundle:Backend:galerie }
+
+wn_backend_galerie_ajouter_element:
+    pattern: /galerie/ajouter
+    defaults: { _controller: WnBackendBundle:Galerie:ajouter }
+
+wn_backend_galerie_modifier_element:
+    pattern: /galerie/editer/{id}
+    defaults: { _controller: WnBackendBundle:Galerie:modifier }
+    requirements:
+        id: \d+
+
+wn_backend_galerie_supprimer_element:
+    pattern: /galerie/supprimer/{id}
+    defaults: { _controller: WnBackendBundle:Galerie:supprimer }
+    requirements:
+        id: \d+
+
+wn_backend_utilisateur:
+    pattern: /utilisateur
+    defaults: { _controller: WnBackendBundle:Backend:utilisateur }
+
+wn_backend_categorie:
+    pattern: /categorie
+    defaults: { _controller: WnBackendBundle:Backend:categorie }
+
+wn_backend_categorie_ajouter:
+    pattern: /categorie/ajouter
+    defaults: { _controller: WnBackendBundle:Categorie:ajouter }
+
+wn_backend_categorie_supprimer:
+    pattern: /categorie/supprimer/{id}
+    defaults: { _controller: WnBackendBundle:Categorie:supprimer }
+    requirements:
+        id: \d+
+
+wn_backend_categorie_editer:
+    pattern: /categorie/editer/{id}
+    defaults: { _controller: WnBackendBundle:Categorie:editer }
+    requirements:
+        id: \d+
+
+wn_backend_model:
+    pattern: /model
+    defaults: { _controller: WnBackendBundle:Backend:model3D }
+
+wn_backend_model_ajouter:
+    pattern: /model/ajouter
+    defaults: { _controller: WnBackendBundle:Model3D:ajouter }
+
+wn_backend_model_supprimer:
+    pattern: /model/supprimer/{id}
+    defaults: { _controller: WnBackendBundle:Model3D:supprimer }
+    requirements:
+        id: \d+
+
+wn_backend_model_editer:
+    pattern: /model/editer/{id}
+    defaults: { _controller: WnBackendBundle:Model3D:editer }
+    requirements:
+        id: \d+
+
+wn_backend_model_config:
+    pattern: /model/config/{id}
+    defaults: { _controller: WnBackendBundle:Model3D:config }
+    requirements:
+        id: \d+

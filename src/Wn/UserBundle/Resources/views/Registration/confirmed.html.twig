@@ -1,0 +1,22 @@
+{% extends "WnUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block css %}
+{% stylesheets "@WnUserBundle/Resources/public/css/register.css" %}
+	<link rel="stylesheet" type="text/css" href="{{asset_url}}">
+{% endstylesheets %}
+{% endblock css %}
+
+{% block container %}
+<div class="content">
+	<h1>Inscription</h1>
+	<div class="message">
+    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+    {% if app.session is not empty %}
+        {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
+        {% if targetUrl is not empty %}<p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>{% endif %}
+    {% endif %}
+    </div>
+</div>
+{% endblock container %}

@@ -32,7 +32,8 @@ class User extends BaseUser
 		parent::__construct();
         $elements     = new \Doctrine\Common\Collections\ArrayCollection();
 		$commentaires = new \Doctrine\Common\Collections\ArrayCollection();
-	}
+	    $this->roles  = array('ROLE_USER');
+    }
 
     /**
      * Add commentaires

@@ -10,9 +10,21 @@
 	font-family    : 'Lato', sans-serif;
 	font-weight    : 400;
 	font-size      : 20px;
+	z-index        : 70;
 	letter-spacing : 0.5px;
 	transition : 
 		all 0.5s ease;
+}
+
+.nav-option{
+	margin-top   : 70px;
+	padding      : 10px 10px 10px 10px;
+	cursor       : pointer;
+	background   : #C6D0DA;
+	font-family  : sans-serif;
+	font-weight  : bold;
+	color        : white;
+
 }
 
 nav ul{
@@ -57,7 +69,6 @@ nav ul li a[class="actif"]{
 @media screen
 and (max-width : 816px){
 	.navigation{
-		z-index : 70; 
     	left    : -200px;
     	border-right : 1px solid #C6D0DA;
     	transition: 

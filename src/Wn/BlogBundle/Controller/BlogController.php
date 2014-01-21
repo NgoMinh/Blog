@@ -135,4 +135,8 @@ class BlogController extends Controller
 			'chroniques'    => $chroniques
 		));
 	}
+
+	public function connexionAction(){
+		return $this->render('WnBlogBundle:User:Connexion.html.twig');
+	}
 }

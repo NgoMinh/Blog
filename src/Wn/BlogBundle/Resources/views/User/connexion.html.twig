@@ -1,0 +1,16 @@
+<form action="{{ path("fos_user_security_check") }}" method="post">
+	<div class="group">
+		<label for="username">Login</label>
+		<input type="text" id="username" name="_username"  required="required" />
+	</div>
+	<div class="group">
+		<label for="password">Password</label>
+		<input type="password" id="password" name="_password" required="required" />
+	</div>
+	<div class="group">
+		<label for="remember_me">Remember me</label>
+		<input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+	</div>
+	<a href="{{path('fos_user_registration_register')}}">Créer un compte</a>
+	<button type="submit" id="_submit" >{{ "security.login.submit"|trans({}, "FOSUserBundle")}}</button>
+</form>

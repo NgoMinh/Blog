@@ -6,14 +6,49 @@
 		var $button = $(".burger-button");
 		var $navBar = $(".navigation");
 		var $blockPage = $(".block-page");
-		$blockPage.fadeOut();
-		var hide    = true;
+		var $returnButton = $(".return");
 		var $connexionButton = $(".nav-connexion");
 		var $connexion = $(".connexion");
-		$connexion.fadeOut();
-		$button.click(buttonEvent);
-		$blockPage.click(blockPageEvent);
-		$connexionButton.click(connexionButtonEvent);
+		$button.click(function (){
+			$connexion.css('left','-200px');
+			if($navBar.css('left') == '-200px'){
+				$navBar.css('left','0px');
+				$blockPage.fadeIn('fast');
+			}else{
+				$navBar.css('left','-200px');
+			}
+			if($connexion.css('left') == '0px'){
+				$connexion.css('left','-200px');
+			}
+		});
+		$returnButton.click(function (){
+			if($connexion.css('left') == '0px'){
+				$connexion.css('left','-200px');
+			}
+			if($navBar.css('left') == '-200px'){
+				$navBar.css('left','0px');
+			}
+			if($(window).width() >= 817){
+				$blockPage.fadeOut();
+			}
+		});
+		$blockPage.click(function (){
+			if($(window).width() < 817){
+				if($navBar.css('left') == '0px'){
+					$navBar.css('left','-200px');
+				}
+			}
+			if($connexion.css('left') == '0px'){
+				$connexion.css('left', '-200px');
+			}
+			$blockPage.fadeOut();
+		});
+		$connexionButton.click(function (){
+			$connexion.css('left','0px');
+			if($(window).width() > 816){
+				$blockPage.fadeIn();
+			}
+		});
 		$(window).resize(function(){
 			console.log($(window).width());
 			if($(window).width() >= 817){
@@ -21,41 +56,10 @@
 			}else{
 				$navBar.css('left','-200px');
 			}
-			$blockPage.fadeOut('fast');
-			$connexion.fadeOut('fast');
-			hide = true;
+			if($connexion.css('left') !== '0px'){
+				$blockPage.fadeOut('fast');
+			}
 		});
-
-		function blockPageEvent (){
-			if($(window).width() < 817){
-				$navBar.css('left','-200px');
-				hide = true;
-			}
-			$blockPage.fadeOut();
-			$connexion.fadeOut();
-		}
-
-		function connexionButtonEvent (){
-			$connexion.fadeIn();
-			if($(window).width() < 817){
-				$navBar.css("left","-200px");
-				hide = true;
-			}
-			$blockPage.fadeIn();
-		}
-
-		function buttonEvent (){
-			$connexion.fadeOut();
-			if(hide == true){
-				$navBar.css("left","0px");
-				$blockPage.fadeIn("fast");
-				hide = false;
-			}else{
-				$navBar.css("left","-200px");
-				$blockPage.fadeOut("fast");
-				hide = true;
-			}
-		}
 
 	});
 </script>
@@ -66,25 +70,11 @@
 		<div class="bottom segment"></div>
 	</div>
 </div>
-<div class="block-page">
+<div class="block-page" style="display : none;">
 </div>
 <div class="connexion">
-	<form action="{{ path("fos_user_security_check") }}" method="post">
-		<div class="group">
-			<label for="username">Login</label>
-			<input type="text" id="username" name="_username"  required="required" />
-		</div>
-		<div class="group">
-			<label for="password">Password</label>
-			<input type="password" id="password" name="_password" required="required" />
-		</div>
-		<div class="group">
-			<label for="remember_me">Remember me</label>
-			<input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-		</div>
-		<a href="{{path('fos_user_registration_register')}}">Créer un compte</a>
-		<button type="submit" id="_submit" >{{ "security.login.submit"|trans({}, "FOSUserBundle")}}</button>
-	</form>
+<div class="nav-option return">Retour</div>
+{{ render(controller('WnBlogBundle:Blog:connexion'))}}
 </div>
 <nav class="navigation">
 	<ul class="list-menu">

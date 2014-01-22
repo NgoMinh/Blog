@@ -13,12 +13,12 @@
 		var parametres = $.extend(defauts, options);
 		return this.each(function()
 		{
-			$(this).find(".icon-expand").fadeOut();
+			$(this).find(".lien-voir").fadeOut();
 
 			$(this).hover(function (event){
-				$(this).find(".icon-expand").fadeIn(100);
+				$(this).find(".lien-voir").fadeIn(100);
 			},function(){
-				$(this).find(".icon-expand").fadeOut(100);
+				$(this).find(".lien-voir").fadeOut(100);
 			});
 
 			parametres.sliderContainer.slider({

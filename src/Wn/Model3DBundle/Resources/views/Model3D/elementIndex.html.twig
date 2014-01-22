@@ -3,7 +3,7 @@
 {% endjavascripts %}
 <div class="element element-model3D">
 	<div class="slider" id="sliderCamDistance-{{model.id}}"></div>
-	<div id="renderModel-{{model.id}}"><span class="icon-expand"></span></div>
+	<div id="renderModel-{{model.id}}"><a class="lien-voir" href="{{ path('wn_model3D_voir',{'id':model.id}) }}"><span class="icon-expand"></span></a></div>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var $renderModel  = $('#renderModel-{{model.id}}');

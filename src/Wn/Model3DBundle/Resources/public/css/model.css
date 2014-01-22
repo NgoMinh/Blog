@@ -1,17 +1,16 @@
 #container{
 	width : 100%;
-	border-top : 2px solid  #314559; 
 }
 
-.element-image{
-	display : block;
-	width   : 100%;
+.element-render{
+	width : 100%;
+	background : white;
 }
 
 @media screen 
 and (min-width : 1451px)
 and (max-width : 1762px){
-	.element-image{
+	.element-render{
 		width : 934px;
 	}
 }
@@ -19,7 +18,11 @@ and (max-width : 1762px){
 @media screen
 and (min-width : 1763px)
 and (max-width : 2074px){
-	.element-image{
+	.element-render{
 		width : 934px;
 	}
+}
+
+#slider{
+	font-size: 10px;
 }

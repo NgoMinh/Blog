@@ -1,3 +1,5 @@
-wn_galerie_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: WnGalerieBundle:Default:index }
+wn_image_voir:
+    pattern: /image/{id}
+    defaults: { _controller: WnGalerieBundle:ElementGalerie:voir }
+    requirements:
+        id: \d+

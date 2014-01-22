@@ -12,15 +12,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class CommentaireRepository extends EntityRepository
 {
-	public function findByArticle($id_article){
+	public function findByIdElement($id_element){
 		$qb = $this->createQueryBuilder('c')
 		           ->where('c.element = :id')
-	      			->setParameter('id', $id_article);
-
-
+	      			->setParameter('id', $id_element);
 
 		return $qb->getQuery()
 		          ->getResult();
+	}
+
+	public function findByIdElementOrderByDate($id_element){
+		$qb = $this->createQueryBuilder('c')
+				   ->where('c.element = :id')
+				    ->setParameter('id',$id_element)
+				   ->orderBy('c.date','DESC');
+		
+		return $qb->getQuery()
+				  ->getResult();
 	}
 
 	public function findLastNByAuteur($auteur, $value){

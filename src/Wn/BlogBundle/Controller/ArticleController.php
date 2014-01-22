@@ -16,7 +16,7 @@ class ArticleController extends Controller
 		$entity_manager = $this->getDoctrine()
 							   ->getManager();
 							   
-		$commentaires = $entity_manager->getRepository('WnBlogBundle:Commentaire')->findByArticle($article->getId());
+		$commentaires = $entity_manager->getRepository('WnBlogBundle:Commentaire')->findByIdElement($article->getId());
 
 		$commentaire = new Commentaire;
 		$commentaire->setAuteur($this->getUser());
@@ -30,7 +30,9 @@ class ArticleController extends Controller
 				$entity_manager->persist($commentaire);
 				$entity_manager->flush();
 
-				return $this->redirect($this->generateUrl('wn_blog_article_voir', array('id' => $article->getId() )));
+				return $this->redirect($this->generateUrl('wn_blog_article_voir', array(
+					'id' => $article->getId()
+				)));
 			}
 		}
 

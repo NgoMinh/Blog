@@ -159,9 +159,25 @@
 }
 
 @media screen
-and (max-width : 816px){ /* 190+2+310+2+310+2 */
+and (max-width : 623px){ /* 190+2+310+2+310+2 */
   /* Styles */
+  	.commentaires{
+		width : 310px;
+	}
 
+	.commentaires form textarea{
+		width     : 198px;
+		max-width : 198px; 
+	}
+
+	.commentaires form input[type="submit"]{
+		width     : 92px;
+		font-size : 14px;	
+	}
+
+	.commentaire .contenu{
+		width : 198px;
+	}
 }
 
 /* iPads (portrait and landscape) ----------- */

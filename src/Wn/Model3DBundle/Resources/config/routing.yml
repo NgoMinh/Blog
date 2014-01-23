@@ -1,1 +1,5 @@
-
+wn_model3D_voir:
+    pattern: /model3D/{id}
+    defaults: { _controller: WnModel3DBundle:Model3D:voir}
+    requirements:
+        id: \d+

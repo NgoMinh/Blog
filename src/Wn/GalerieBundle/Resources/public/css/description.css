@@ -1,6 +1,7 @@
 .description{ 
 	background    : white;
 	color         : #202D39;
+	width         : 622px;
 }
 
 .description .auteur-date{
@@ -41,4 +42,38 @@
 
 .description .inline{
 	display : inline-block;
+}
+
+@media screen
+and (max-width : 623px){ /* 190+2+310+2+310+2 */
+  /* Styles */
+  	.description{
+		width : 310px;
+	}
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media screen 
+and (min-width : 817px)
+and (max-width : 1128px){ /* 190+2+310+2+310+2+310+2 */
+
+}
+
+/* Desktops and laptops ----------- */
+@media screen 
+and (min-width : 1129px)
+and (max-width : 1450px){
+	.description{
+		width : 934px;
+	}
+
+}
+
+@media screen 
+and (min-width : 1451px)
+and (max-width : 1762px){
+	.description{
+		width : 310px;
+	}
+
 }

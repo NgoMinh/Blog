@@ -3,7 +3,8 @@
 }
 
 .element-render{
-	width : 100%;
+	position   : relative;
+	width      : 100%;
 	background : white;
 }
 
@@ -24,5 +25,9 @@ and (max-width : 2074px){
 }
 
 #slider{
-	font-size: 10px;
+	font-size : 10px;
+	position  : absolute;
+	top       : 4px;
+	width     : 96%;
+	left      : 2%;
 }

@@ -28,7 +28,8 @@
 	</script>
 	<div class="element element-antibug"></div>
 	<img class="element element-image" src="{{ asset(image.WebPath) }}">
-	<div class="commentaires element">
+
+	<div class="element description-comments">
 		<div class="description">
 			<div class="auteur-date">
 				<span class="icon-user avatar inline"></span>
@@ -40,45 +41,7 @@
 			</div>
 			<p>Description : {{ image.note }}</p>
 		</div>
-		<div class="ban"><span class="text">Commentaire</span></div>
-		{# Formulaire pour mettre un commentaire #}
-		<form method="post" {{ form_enctype(form)}}>
-			{{ form_errors(form) }}
-			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-				{{ form_widget(form.contenu, {'attr':{'placeholder' : 'Entrer votre commentaire ici.'} }) }}
-			{% else %}
-				{{ form_widget(form.contenu, {'attr':{'placeholder' : 'Veuillez vous connecter pour écrire un commentaire sur cette article.', 'disabled' : 'disabled'} }) }}
-			{% endif %}
-				{{ form_rest(form) }}
-			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-				<input type="submit" value="Envoyer"/>
-			{% else %}
-				<input type="submit" value="Envoyer" disabled />
-			{% endif %}
-		</form>
-		
-
-		{# Liste des commentaires #}
-		{% if commentaires|length == 0 %}
-		<div class="ban ban-0commentaire">
-			<span class="text">Cette article n'a pas encore été commenté</span>
-		</div>
-		{% endif %}
-		{% for commentaire in commentaires %}
-		<div class="commentaire">
-			<div class="auteur">
-				<div class="triangle">
-					<div class="triangle-bleu"></div>
-					<div class="triangle-blanc"></div>
-				</div>
-				<span class="icon-user avatar"></span>
-				<a href="{{ path('wn_blog_utilisateur',{'id':commentaire.auteur.id}) }}" class="pseudo">{{ commentaire.auteur.username }}</a>
-			</div>
-			<div class="contenu">
-				<p>{{ commentaire.contenu }}</p>
-			</div>
-		</div><!-- commentaire -->
-		{% endfor %}
-	</div><!-- commentaires -->
+		{{ render(controller('WnBlogBundle:Commentaire:viewOnElement',{'element':image}))}}
+	</div>
 </div>
 {% endblock container %}

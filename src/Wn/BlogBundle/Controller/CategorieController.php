@@ -1,14 +1,15 @@
 <?php
 
-namespace Wn\BackendBundle\Controller;
+namespace Wn\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Wn\BlogBundle\Entity\Categorie;
+
 use Wn\BlogBundle\Form\CategorieType;
 
-class CategorieController extends Controller
-{
+class CategorieController extends Controller{
+
 	public function ajouterAction()
 	{
 		$categorie = new Categorie;

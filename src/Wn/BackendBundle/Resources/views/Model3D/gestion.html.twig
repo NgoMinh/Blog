@@ -16,7 +16,8 @@
 		{% for model in models %}
 		<tr>
 			<td><a href="{{ path('wn_backend_model_config',{'id' : model.id })}}">{{model.id}}</a></td>
-			<td><a href="{{ path('wn_backend_model_config',{'id' : model.id}) }}">supprimer</a></td>
+			<td>{{model.nom}}</td>
+			<td><a href="{{ path('wn_backend_model_supprimer',{'id' : model.id}) }}">supprimer</a></td>
 		</tr>
 		{% endfor %}
 	</tbody>

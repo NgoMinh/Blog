@@ -1,11 +1,8 @@
 <?php
 
-namespace Wn\BackendBundle\Controller;
+namespace Wn\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use Wn\BlogBundle\Entity\Commentaire;
-use Wn\BlogBundle\Form\CommentaireType;
 
 class CommentaireController extends Controller
 {

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Wn\BlogBundle\Entity\ElementRepository")
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
- * @ORM\DiscriminatorMap({"element" = "Element", "article" = "Article", "elementgalerie" = "Wn\GalerieBundle\Entity\ElementGalerie", "model3d" = "Wn\Model3DBundle\Entity\Model3D" })
+ * @ORM\DiscriminatorMap({"element" = "Element", "article" = "Article", "imagegallery" = "Wn\GalleryBundle\Entity\ImageGallery", "model3d" = "Wn\Model3DBundle\Entity\Model3D" })
  */
 class Element
 {
@@ -26,23 +26,23 @@ class Element
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="datePublication", type="datetime")
+     * @ORM\Column(name="dateOfPublication", type="datetime")
      */
-    private $datePublication;
+    private $dateOfPublication;
 
     /**
-     * @ORM\OneToMany(targetEntity="Wn\BlogBundle\Entity\Commentaire", mappedBy="element", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Wn\BlogBundle\Entity\Comment", mappedBy="element", cascade={"remove"})
      */
-    private $commentaires;
+    private $comments;
 
     /**
      * @ORM\ManyToOne(targetEntity="Wn\UserBundle\Entity\User", inversedBy="elements")
      */
-    private $auteur;
+    private $author;
 
 
     public function __construct(){
-              $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
+              $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -56,81 +56,81 @@ class Element
     }
 
     /**
-     * Set datePublication
+     * Set dateOfPublication
      *
-     * @param \DateTime $datePublication
+     * @param \DateTime $dateOfPublication
      * @return Element
      */
-    public function setDatePublication($datePublication)
+    public function setDateOfPublication($dateOfPublication)
     {
-        $this->datePublication = $datePublication;
+        $this->dateOfPublication = $dateOfPublication;
     
         return $this;
     }
 
     /**
-     * Get datePublication
+     * Get dateOfPublication
      *
      * @return \DateTime 
      */
-    public function getDatePublication()
+    public function getDateOfPublication()
     {
-        return $this->datePublication;
+        return $this->dateOfPublication;
     }
 
     /**
-     * Add commentaires
+     * Add comments
      *
-     * @param \Wn\BlogBundle\Entity\Commentaire $commentaires
+     * @param \Wn\BlogBundle\Entity\Comment $comments
      * @return Element
      */
-    public function addCommentaire(\Wn\BlogBundle\Entity\Commentaire $commentaires)
+    public function addComment(\Wn\BlogBundle\Entity\Comment $comments)
     {
-        $this->commentaires[] = $commentaires;
+        $this->comments[] = $comments;
     
         return $this;
     }
 
     /**
-     * Remove commentaires
+     * Remove comments
      *
-     * @param \Wn\BlogBundle\Entity\Commentaire $commentaires
+     * @param \Wn\BlogBundle\Entity\Comment $comments
      */
-    public function removeCommentaire(\Wn\BlogBundle\Entity\Commentaire $commentaires)
+    public function removeComment(\Wn\BlogBundle\Entity\Comment $comments)
     {
-        $this->commentaires->removeElement($commentaires);
+        $this->comments->removeElement($comments);
     }
 
     /**
-     * Get commentaires
+     * Get comments
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getCommentaires()
+    public function getComments()
     {
-        return $this->commentaires;
+        return $this->comments;
     }
 
     /**
-     * Set auteur
+     * Set author
      *
-     * @param \Wn\UserBundle\Entity\User $auteur
+     * @param \Wn\UserBundle\Entity\User $author
      * @return Element
      */
-    public function setAuteur(\Wn\UserBundle\Entity\User $auteur = null)
+    public function setAuthor(\Wn\UserBundle\Entity\User $author = null)
     {
-        $this->auteur = $auteur;
-        $auteur->addElement($this);
+        $this->author = $author;
+        $author->addElement($this);
         return $this;
     }
 
     /**
-     * Get auteur
+     * Get author
      *
      * @return \Wn\UserBundle\Entity\User 
      */
-    public function getAuteur()
+    public function getAuthor()
     {
-        return $this->auteur;
+        return $this->author;
     }
 }

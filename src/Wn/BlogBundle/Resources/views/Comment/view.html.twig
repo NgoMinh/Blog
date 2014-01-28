@@ -1,0 +1,41 @@
+<div class="commentaires">
+	<div class="ban"><span class="text">Comments</span></div>
+	{# Formulaire pour mettre un commentaire #}
+	<form action="{{path('wn_blog_comment_view',{'id': element.id })}}" method="POST" {{ form_enctype(form)}}>
+		{{ form_errors(form) }}
+		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+			{{ form_widget(form.content, {'attr':{'placeholder' : 'Entrer votre commentaire ici.'} }) }}
+		{% else %}
+			{{ form_widget(form.content, {'attr':{'placeholder' : 'Veuillez vous connecter pour écrire un commentaire sur cette article.', 'disabled' : 'disabled'} }) }}
+		{% endif %}
+			{{ form_rest(form) }}
+		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+			<input type="submit" value="Envoyer"/>
+		{% else %}
+			<input type="submit" value="Envoyer" disabled />
+		{% endif %}
+	</form>
+	
+
+	{# Liste des commentaires #}
+	{% if comments|length == 0 %}
+	<div class="ban ban-0commentaire">
+		<span class="text">Cette article n'a pas encore été commenté</span>
+	</div>
+	{% endif %}
+	{% for comment in comments %}
+	<div class="commentaire">
+		<div class="auteur">
+			<div class="triangle">
+				<div class="triangle-bleu"></div>
+				<div class="triangle-blanc"></div>
+			</div>
+			<span class="icon-user avatar"></span>
+			<a href="{{ path('wn_blog_user',{'id':comment.author.id}) }}" class="pseudo">{{ comment.author.username }}</a>
+		</div>
+		<div class="contenu">
+			<p>{{ comment.content }}</p>
+		</div>
+	</div><!-- commentaire -->
+	{% endfor %}
+</div><!-- commentaires -->

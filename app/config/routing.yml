@@ -2,9 +2,9 @@ wn_model3_d:
     resource: "@WnModel3DBundle/Resources/config/routing.yml"
     prefix:   /
 
-wn_galerie:
-    resource: "@WnGalerieBundle/Resources/config/routing.yml"
-    prefix:   /galerie
+wn_gallery:
+    resource: "@WnGalleryBundle/Resources/config/routing.yml"
+    prefix:   /gallery
 
 wn_backend:
     resource: "@WnBackendBundle/Resources/config/routing.yml"

@@ -11,15 +11,15 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre'           , 'text')
-            ->add('datePublication' , 'datetime')
-            ->add('categorie'       , 'entity', array('class' => 'WnBlogBundle:Categorie',
-                                                      'property' => 'nom',
-                                                      'multiple' => false))
-            ->add('synopsis'        , 'text')
-            ->add('imageAffiche'    , new ImageAfficheType())
-            ->add('contenu'         , 'textarea')
-            ->add('publie'          , 'checkbox')
+            ->add('title'             , 'text')
+            ->add('dateOfPublication' , 'datetime')
+            ->add('category'          , 'entity', array('class' => 'WnBlogBundle:Category',
+                                                        'property' => 'name',
+                                                        'multiple' => false))
+            ->add('synopsis'          , 'text')
+            ->add('poster'            , new PosterType())
+            ->add('content'           , 'textarea')
+            ->add('publish'           , 'checkbox')
         ;
     }
 

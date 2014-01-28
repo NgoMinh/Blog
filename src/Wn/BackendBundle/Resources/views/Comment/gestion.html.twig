@@ -1,0 +1,36 @@
+{% extends "WnBackendBundle::layout.html.twig" %}
+
+{% block title %}Management comments{% endblock title %}
+
+{% block body %}
+<h3>Management comments</h3>
+<table>
+	<thead>
+		<tr>
+			<th>#Id</th>
+			<th>Author</th>
+			<th>Content</th>
+			<th>Date</th>
+			<th>Censored</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for comment in comments %}
+		<tr>
+			<td>{{ comment.id }}</td>
+			<td>{{ comment.author.username }}</td>
+			<td>{{ comment.content }}</td>
+			<td>{{ comment.date | date('d-m-Y')}}</td>
+			<td>
+				{% if comment.censored %}
+					yes
+				{% else %}
+					no
+				{% endif %}
+			</td>
+			<td><a href="#">censored</a></td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+{% endblock body %}

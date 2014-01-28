@@ -3,7 +3,7 @@
 namespace Wn\BlogBundle\Twig;
 
 use Wn\BlogBundle\Entity\Article;
-use Wn\GalerieBundle\Entity\ElementGalerie;
+use Wn\GalleryBundle\Entity\ImageGallery;
 use Wn\Model3DBundle\Entity\Model3D;
 
 class BlogExtension extends \Twig_Extension
@@ -12,7 +12,7 @@ class BlogExtension extends \Twig_Extension
 	{
 		return array(
 			'wn_article'        => new \Twig_Test_Method($this, 'isArticle'),
-			'wn_elementGalerie' => new \Twig_Test_Method($this, 'isElementGalerie'),
+			'wn_imageGallery'   => new \Twig_Test_Method($this, 'isImageGallery'),
 			'wn_model3d'        => new \Twig_Test_Method($this, 'isModel3D')
 		);
 	}
@@ -22,9 +22,9 @@ class BlogExtension extends \Twig_Extension
 		return ($element instanceof Article);
 	}
 
-	public function isElementGalerie($element)
+	public function isImageGallery($element)
 	{
-		return ($element instanceof ElementGalerie);
+		return ($element instanceof ImageGallery);
 	}
 
 	public function isModel3D($element)

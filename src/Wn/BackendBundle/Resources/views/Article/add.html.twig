@@ -1,0 +1,16 @@
+{% extends "WnBackendBundle::layout.html.twig" %}
+
+{% block title %}Adding an article{% endblock title%}
+
+{% block body %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('textarea').ckeditor();
+	});
+</script>
+<form method="POST" {{ form_enctype(form) }}>
+	{{ form_widget(form) }}
+	{{ form_widget(form.content, {'attr' : {'class':'article-contenu'}}) }}
+	<input type="submit"/>
+</form>
+{% endblock body %}

@@ -121,8 +121,9 @@
 }
 
 .commentaires .commentaire .contenu{
-	display : block;
-	margin  : 20px 0px 0px 0px;
+	display   : block;
+	margin    : 20px 0px 0px 0px;
+	font-size : 14px;
 }
 
 @media screen

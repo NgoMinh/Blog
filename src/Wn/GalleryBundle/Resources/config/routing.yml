@@ -1,0 +1,5 @@
+wn_gallery_image_view:
+    pattern: /image/{id}
+    defaults: { _controller: WnGalleryBundle:ImageGallery:view }
+    requirements:
+        id: \d+

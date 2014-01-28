@@ -7,23 +7,25 @@
 			"sliderContainer" : null,
 			"linkModel"       : null,
 			"minCamDistance"  : null,
-			"maxCamDistance"  : null
+			"maxCamDistance"  : null,
+			"linkView"        : null,
 		};
 
 		var parametres = $.extend(defauts, options);
 		return this.each(function()
 		{
-			$(this).find(".lien-voir").fadeOut();
+			parametres.linkView.fadeOut();
 
 			$(this).hover(function (event){
-				$(this).find(".lien-voir").fadeIn(100);
+				parametres.linkView.fadeIn(100);
 			},function(){
-				$(this).find(".lien-voir").fadeOut(100);
+				parametres.linkView.fadeOut(100);
 			});
 
 			parametres.sliderContainer.slider({
 				orientation : 'horizontal',
 				range       : 'min',
+				step        : 0.01,
 				min         : parametres.minCamDistance,
 				max         : parametres.maxCamDistance,
 				slide       : function (event, ui){
@@ -31,8 +33,8 @@
 				}
 			});
 
-			var scene = new THREE.Scene();
-			var camera = new THREE.PerspectiveCamera(75, parametres.renderWidth/parametres.renderHeight, 0.1, 1000);
+			var scene    = new THREE.Scene();
+			var camera   = new THREE.PerspectiveCamera(75, parametres.renderWidth/parametres.renderHeight, 0.1, 1000);
 			var renderer = new THREE.WebGLRenderer({
 				antialias : true
 			});

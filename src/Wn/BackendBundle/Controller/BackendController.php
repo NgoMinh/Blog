@@ -11,60 +11,66 @@ class BackendController extends Controller
 		return $this->render('WnBackendBundle:Backend:index.html.twig');
 	}
 
-	public function menuAction()
+	public function navAction()
 	{
-		return $this->render('WnBackendBundle:Backend:menu.html.twig');
+		return $this->render('WnBackendBundle:Backend:nav.html.twig');
 	}
 
 	public function articleAction()
 	{
-		$entity_manager = $this->getDoctrine()->getManager();
-		$articles       = $entity_manager->getRepository('WnBlogBundle:Article')->findAll();
+		$articles = $this->getDoctrine()
+		                 ->getManager()
+		                 ->getRepository('WnBlogBundle:Article')
+		                 ->findAll();
+
 		return $this->render('WnBackendBundle:Article:gestion.html.twig', array(
 			'articles' => $articles
 		));
 	}
 
-	public function commentaireAction()
+	public function commentAction()
 	{
-		$entity_manager = $this->getDoctrine()->getManager();
-		$commentaires    = $entity_manager->getRepository('WnBlogBundle:Commentaire')->findAll();
-		return $this->render('WnBackendBundle:Commentaire:gestion.html.twig', array(
-			'commentaires' => $commentaires
+		$comments = $this->getDoctrine()
+						 ->getManager()
+					     ->getRepository('WnBlogBundle:Comment')
+					     ->findAll();
+
+		return $this->render('WnBackendBundle:Comment:gestion.html.twig', array(
+			'comments' => $comments
 		));
 	}
 
-	public function galerieAction()
+	public function galleryAction()
 	{
-		$galerie = $this->getDoctrine()
+		$gallery = $this->getDoctrine()
 		                ->getManager()
-		                ->getRepository('WnGalerieBundle:Galerie')
-		                ->findByNom('Galerie principale');
+		                ->getRepository('WnGalleryBundle:Gallery')
+		                ->findByName('Main Gallery');
 		
-		return $this->render('WnBackendBundle:Galerie:gestion.html.twig', array(
-			'galerie' => $galerie
+		return $this->render('WnBackendBundle:Gallery:gestion.html.twig', array(
+			'gallery' => $gallery
 		));
 	}
 
-	public function utilisateurAction()
+	public function userAction()
 	{
 		$users = $this->getDoctrine()
-		             ->getManager()
-		             ->getRepository('WnUserBundle:User')
-		             ->findAll();
-		return $this->render('WnBackendBundle:Utilisateur:gestion.html.twig', array(
+		              ->getManager()
+		              ->getRepository('WnUserBundle:User')
+		              ->findAll();
+		return $this->render('WnBackendBundle:User:gestion.html.twig', array(
 			'users' => $users
 		));
 	}
 
-	public function categorieAction()
+	public function categoryAction()
 	{
 		$categories = $this->getDoctrine()
-					      ->getManager()
-					      ->getRepository('WnBlogBundle:Categorie')
-					      ->findAll();
+					       ->getManager()
+					       ->getRepository('WnBlogBundle:category')
+					       ->findAll();
 
-		return $this->render('WnBackendBundle:Categorie:gestion.html.twig', array(
+		return $this->render('WnBackendBundle:Category:gestion.html.twig', array(
 			'categories' => $categories
 		));
 	}

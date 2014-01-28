@@ -19,53 +19,53 @@ class User extends BaseUser
 	protected $id;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="Wn\BlogBundle\Entity\Commentaire" , mappedBy="auteur")
+	 * @ORM\OneToMany(targetEntity="Wn\BlogBundle\Entity\Comment" , mappedBy="author")
 	 */
-	private $commentaires;
+	private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity="Wn\BlogBundle\Entity\Element", mappedBy="auteur")
+     * @ORM\OneToMany(targetEntity="Wn\BlogBundle\Entity\Element", mappedBy="author")
      */
     private $elements;
 
 	public function __construct(){
 		parent::__construct();
         $elements     = new \Doctrine\Common\Collections\ArrayCollection();
-		$commentaires = new \Doctrine\Common\Collections\ArrayCollection();
+		$comments     = new \Doctrine\Common\Collections\ArrayCollection();
 	    $this->roles  = array('ROLE_USER');
     }
 
     /**
-     * Add commentaires
+     * Add comments
      *
-     * @param \Wn\BlogBundle\Entity\Commentaire $commentaires
+     * @param \Wn\BlogBundle\Entity\Comment $comments
      * @return User
      */
-    public function addCommentaire(\Wn\BlogBundle\Entity\Commentaire $commentaires)
+    public function addComment(\Wn\BlogBundle\Entity\Comment $comments)
     {
-        $this->commentaires[] = $commentaires;
+        $this->comments[] = $comments;
     
         return $this;
     }
 
     /**
-     * Remove commentaires
+     * Remove comments
      *
-     * @param \Wn\BlogBundle\Entity\Commentaire $commentaires
+     * @param \Wn\BlogBundle\Entity\Comment $comments
      */
-    public function removeCommentaire(\Wn\BlogBundle\Entity\Commentaire $commentaires)
+    public function removeComment(\Wn\BlogBundle\Entity\Comment $comments)
     {
-        $this->commentaires->removeElement($commentaires);
+        $this->comments->removeElement($comments);
     }
 
     /**
-     * Get commentaires
+     * Get comments
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getCommentaires()
+    public function getComments()
     {
-        return $this->commentaires;
+        return $this->comments;
     }
 
     /**

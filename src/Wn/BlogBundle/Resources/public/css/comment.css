@@ -1,0 +1,228 @@
+/* Commentaire Style */
+.container{
+	min-height : 100%;
+}
+
+#container{
+	min-height : 100%;
+}
+
+.commentaires{
+	width  : 622px;
+}
+
+
+.commentaires .ban{
+	color       : white;
+	font-size   : 34px; 
+	line-height : 1.3em;
+	font-family : "Lato-light";
+	width       : 100%;
+	padding     : 10px 0px 10px 0px;
+}
+
+.commentaires .ban .text{
+	padding : 0px 20px 0px 20px;
+}
+
+.commentaires .ban-0commentaire{
+	border-top : 2px solid #314559; 
+	color      : #202D39;
+	background : white;
+}
+
+.commentaires .ban-0commentaire .text{
+	display   : block;
+	padding   : 0px 20px 0px 20px;
+	font-size : 25px; 
+}
+
+.commentaires form{
+	font-size: 0px;
+}
+
+.commentaires form div:first-child{
+	display        : inline-block;
+	vertical-align : top;
+}
+
+.commentaires form textarea{
+	width      : 480px;
+	max-width  : 480px;
+	height     : 78px;
+	max-height : 78px;
+	margin     : 0px;
+	padding    : 16px 10px 16px 10px;
+	border     : 0px solid transparent;
+	font-family: sans-serif;
+	font-size  : 16px;
+}
+
+.commentaires form input[type="submit"]{
+	display        : inline-block;
+	vertical-align : top;
+	margin         : 0px;
+	padding        : 0px;
+	border         : 0px solid transparent;
+	border-left    : 1px solid #C6D0DA;
+	background     : white;
+	width          : 122px;
+	height         : 110px;
+	cursor         : pointer;
+	font-size      : 22px;
+	font-family    : 'Lato-light';
+	font-weight    : bold;  
+	color          : #202D39; 
+}
+
+.commentaire{
+	border-top : 2px solid #314559;
+	font-size  : 0px;
+	background : white;
+}
+
+.commentaire:last-child{
+	border-bottom : 2px solid #314559;
+}
+
+.commentaire .auteur{
+	display        : inline-block;
+	vertical-align : top;
+	width          : 100px;
+	height         : 100px;
+	position       : relative; 
+}
+
+.commentaire .auteur .avatar{
+	display    : block;
+	font-size  : 50px;
+	color      : white;
+	background : #C6D0DA;
+	width      : 50px;
+	padding    : 10px;
+	border     : 15px solid white;
+	border-bottom: 5px solid white;
+}
+
+.commentaire .auteur .pseudo{
+	text-decoration: none;
+	display        : block;
+	color          : #202D39;
+	font-family    : "Lato-light";
+	font-size      : 12px;
+	font-weight    : bold;
+	letter-spacing : 0.5px;
+	text-align     : center;
+}
+
+.commentaire .triangle{
+	position : absolute;
+	right    : 12px;
+	top      : 22px;
+}
+
+.commentaire .triangle .triangle-bleu{
+	position      : absolute;
+	font-size     : 0px;
+	line-height   : 0px;
+	width         : 0px;
+	border-top    : 5px solid transparent;/* couleur du triangle*/
+	border-bottom : 5px solid transparent; 
+	border-right  : 12px solid #C6D0DA;
+}
+
+.commentaire .triangle .triangle-blanc{
+	position      : absolute;
+	left          : 2.2px;
+	font-size     : 0px;
+	line-height   : 0px;
+	width         : 0px;
+	border-top    : 5px solid transparent;/* couleur du triangle*/
+	border-bottom : 5px solid transparent; 
+	border-right  : 12px solid white;
+}
+
+
+.commentaire .contenu{
+	display        : inline-block;
+	vertical-align : top;
+	width          : 500px;
+	min-height     : 110px;
+	padding        : 0px 0px 0px 0px;
+	border-left    : 1px solid #C6D0DA; 
+}
+
+.commentaire .contenu p{
+	padding     : 0px 10px 0px 10px;
+	font-size   : 16px;
+	font-weight : 400;
+}
+
+@media screen
+and (max-width : 623px){ /* 190+2+310+2+310+2 */
+  /* Styles */
+  	.commentaires{
+		width : 310px;
+	}
+
+	.commentaires form textarea{
+		width     : 198px;
+		max-width : 198px; 
+	}
+
+	.commentaires form input[type="submit"]{
+		width     : 92px;
+		font-size : 14px;	
+	}
+
+	.commentaire .contenu{
+		width : 198px;
+	}
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media screen 
+and (min-width : 817px)
+and (max-width : 1128px){ /* 190+2+310+2+310+2+310+2 */
+
+}
+
+/* Desktops and laptops ----------- */
+@media screen 
+and (min-width : 1129px)
+and (max-width : 1450px){
+	.commentaires{
+		width : 934px;
+	}
+
+	.commentaires form textarea{
+		width     : 792px;
+		max-width : 792px;
+	}
+
+	.commentaire .contenu{
+		width : 833px;
+	}
+}
+
+@media screen 
+and (min-width : 1451px)
+and (max-width : 1762px){
+	.commentaires{
+		width : 310px;
+	}
+
+	.commentaires form textarea{
+		width     : 198px;
+		max-width : 198px; 
+	}
+
+	.commentaires form input[type="submit"]{
+		width     : 92px;
+		font-size : 14px;	
+	}
+
+	.commentaire .contenu{
+		width : 198px;
+	}
+}

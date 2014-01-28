@@ -1,18 +1,18 @@
 {% extends "WnBackendBundle::layout.html.twig" %}
 
-{% block title %}Gestion des articles{% endblock title %}
+{% block title %}Management articles{% endblock title %}
 
 {% block body %}
-<h3>Gestion des articles</h3>
-<a href="{{ path('wn_backend_article_ajouter') }}">ajouter</a>
+<h3>Management articles</h3>
+<a href="{{ path('wn_backend_article_add') }}">add</a>
 <table>
 	<thead>
 		<tr>
 			<th>Id</th>
-			<th>Titre</th>
-			<th>Date de creation</th>
-			<th>Date de publication</th>
-			<th>Image d'affiche</th>
+			<th>Title</th>
+			<th>Creation date</th>
+			<th>Date of publication</th>
+			<th>Poster</th>
 			<th>Synopsis</th>
 			<th></th>
 		</tr>
@@ -21,20 +21,20 @@
 		{% for article in articles %}
 		<tr>
 			<td>
-				<a href="{{ path('wn_backend_article_editer', {'id' : article.id }) }}">
+				<a href="{{ path('wn_backend_article_edit', {'id' : article.id }) }}">
 					{{ article.id }}
 				</a>
 			</td>
-			<td>{{ article.titre }}</td>
-			<td>{{ article.dateCreation | date('d/m/Y') }}</td>
-			<td>{{ article.datePublication | date('d/m/Y') }}</td>
+			<td>{{ article.title }}</td>
+			<td>{{ article.creationDate | date('d/m/Y') }}</td>
+			<td>{{ article.dateOfPublication | date('d/m/Y') }}</td>
 			<td>
-				<img src="{{ asset(article.imageAffiche.WebPath) }}" style="width:100px;height:75px;"/>
+				<img src="{{ asset(article.poster.WebPath) }}" style="width:100px;height:75px;"/>
 			</td>
 			<td>{{ article.synopsis   }}</td>
 			<td>
-				<a href="{{ path('wn_backend_article_supprimer', {'id' : article.id }) }}">
-					supprimer
+				<a href="{{ path('wn_backend_article_delete', {'id' : article.id }) }}">
+					delete
 				</a>
 			</td>
 		</tr>

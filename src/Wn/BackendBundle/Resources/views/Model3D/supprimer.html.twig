@@ -1,8 +1,0 @@
-{% extends "WnBackendBundle::layout.html.twig" %}
-{% block title %}Suppression du model{% endblock title %}
-{% block body %}
-<form method="POST" {{ form_enctype(form) }}>
-	{{ form_widget(form) }}
-	<input type="submit"/>
-</form>
-{% endblock body %}

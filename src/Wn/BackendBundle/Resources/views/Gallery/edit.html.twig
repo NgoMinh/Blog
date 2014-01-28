@@ -1,0 +1,13 @@
+{% extends "WnBackendBundle::layout.html.twig" %}
+
+{% block title %}Editing an image{% endblock title %}
+
+{% block body %}
+
+<h3>Editing an image from the main gallery</h3>
+
+<form method="POST" {{ form_enctype(form) }}>
+	{{ form_widget(form) }}
+	<input type="submit"/>
+</form>
+{% endblock body %}

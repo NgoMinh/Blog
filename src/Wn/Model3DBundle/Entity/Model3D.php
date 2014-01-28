@@ -18,9 +18,9 @@ class Model3D extends Element
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $nom;
+    private $name;
 
     /**
      * @var string
@@ -83,36 +83,36 @@ class Model3D extends Element
 
     public function __construct()
     {
-        $this->setDatePublication(new \Datetime);
-        $this->textures = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->camDistanceMax = 200;
-        $this->camDistanceMin = 0;
+        $this->setDateOfPublication(new \Datetime);
+        $this->textures          = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->camDistanceMax    = 200;
+        $this->camDistanceMin    = 0;
         $this->camStartPositionX = 0;
         $this->camStartPositionY = 0;
         $this->camStartPositionZ = 0;
     }
 
     /**
-     * Set nom
+     * Set name
      *
-     * @param string $nom
+     * @param string $name
      * @return Model3DD
      */
-    public function setNom($nom)
+    public function setName($name)
     {
-        $this->nom = $nom;
+        $this->name = $name;
     
         return $this;
     }
 
     /**
-     * Get nom
+     * Get name
      *
      * @return string 
      */
-    public function getNom()
+    public function getName()
     {
-        return $this->nom;
+        return $this->name;
     }
 
     public function getUploadDir()
@@ -135,10 +135,10 @@ class Model3D extends Element
         $this->file = $file;
         if(null !== $this->fileName)
         {
-            $this->tempFilename = $this->fileName;
+            $this->tempFilename      = $this->fileName;
             $this->tempFileExtension = $this->fileExtension;
-            $this->fileName = null;
-            $this->fileExtension = null;
+            $this->fileName          = null;
+            $this->fileExtension     = null;
         }
     }
 

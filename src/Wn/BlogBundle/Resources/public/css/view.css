@@ -1,0 +1,35 @@
+.description-comments{
+	width : 622px;
+}
+
+@media screen
+and (max-width : 623px){ /* 190+2+310+2+310+2 */
+  /* Styles */
+  	.description-comments{
+		width : 310px;
+	}
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media screen 
+and (min-width : 817px)
+and (max-width : 1128px){ /* 190+2+310+2+310+2+310+2 */
+
+}
+
+/* Desktops and laptops ----------- */
+@media screen 
+and (min-width : 1129px)
+and (max-width : 1450px){
+	.description-comments{
+		width : 934px;
+	}
+}
+
+@media screen 
+and (min-width : 1451px)
+and (max-width : 1762px){
+	.description-comments{
+		width : 310px;
+	}
+}

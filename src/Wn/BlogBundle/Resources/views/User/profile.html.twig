@@ -1,0 +1,134 @@
+{% extends "WnBlogBundle::layout.html.twig" %}
+
+{% block title %}Profil de {{ user.username }}{% endblock title %}
+
+{% block nav %}
+	{{ render(controller("WnBlogBundle:Blog:navOnView")) }}
+{% endblock nav %}
+{% block container %}
+{% stylesheets "@WnBlogBundle/Resources/public/css/profil.css" %}
+	<link rel="stylesheet" type="text/css" href="{{asset_url}}">
+{% endstylesheets %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#container').imagesLoaded(function(){
+			$('#container').masonry({
+				itemSelector : '.element',
+				gutter : 2,
+			});
+			$('#container').masonry('layout');
+		});
+	});
+</script>
+<div id="container">
+	<div class="element element-antibug"></div>
+	<div class="element profil">
+		
+		<span class="icon-user avatar"></span>
+		<div class="pseudo-status">
+			<h2 class="pseudo">{{ user.username }}</h2>
+			<span class="status">Status : {{role}}</span>
+		</div>
+
+		<div class="info-sup">
+		</div>
+		
+		{# Liste des articles publié #}
+		<div class="categorie">
+			<span class="nom">Article publié</span>
+			<h4>Chronic</h4>
+			<table>
+			{% for chronic in list_chronic %}
+				<tr>
+					<td class="date"><span class="date">{{chronic.dateOfPublication|date('d-m-Y')}}</span><td>
+					<td><a class="link" href="{{ path('wn_blog_article_view',{'id':chronic.id}) }}">{{ chronic.title }}</a><td>
+				</tr>
+			{% endfor %}
+			</table>
+			<h4>Tutorial</h4>
+			<table>
+			{% for tutorial in tutorials %}
+				<tr>
+					<td class="date"><span class="date">{{tutorial.dateOfPublication|date('d-m-Y')}}</span></td>
+					<td><a class="link" href="{{ path('wn_blog_article_view', {'id': tutorial.id}) }}">{{ tutorial.title }}</a></td>
+				</tr>
+			{% endfor %}
+			</table>
+			<h4>Event</h4>
+			<table>
+			{% for event in events %}
+				<tr>
+					<td class="date"><span class="date">{{event.dateOfPublication|date('d-m-Y')}}</span></td>
+					<td><a class="link" href="{{ path('wn_blog_article_view', {'id': event.id}) }}">{{ event.title }}</a></td>
+				</tr>
+			{% endfor %}
+			</table>
+		</div>
+
+		{# Liste des images posté #}
+		<div class="categorie">
+			<span class="nom">Image dans la galerie</span>
+			<table>
+			{% for element in user.elements %}
+				{% if element is wn_imageGallery %}
+				<tr>
+					<td class="date">{{ element.dateOfPublication|date('d-m-Y') }}</td>
+					<td><a class="link" href="#">{{ element.title }}</a></td>
+				</tr>
+				{% endif %}
+			{% endfor %}
+			</table>
+		</div>
+
+
+		{# Liste des model 3D posté #}
+		<div class="categorie">
+			<span class="nom">Model 3D</span>
+			<table>
+			{% for element in user.elements %}
+				{% if element is wn_model3d %}
+				<tr>
+					<td class="date">{{element.dateOfPublication|date('d-m-Y')}}</td>
+					<td><a class="link" href="#">{{ element.name }}</a></td>
+				</tr>
+				{% endif %}
+			{% endfor %}
+			</table>
+		</div>
+
+		<div class="border-top"></div>
+		<div class="border-bottom"></div>
+	</div>
+
+	{# Block sur les derniers commentaires posté #}
+	<div class="element commentaires">
+		<span class="ban">Dernier messages posté</span>
+		{# Representation d'un commentaire #}
+		{% for comment in comments %}
+		<div class="commentaire">
+			<span class="article">
+				<a href="{{path('wn_blog_article_view',{'id':comment.element.id})}}">
+				{% if comment.element is wn_model3d %}
+					{{ comment.element.name }}
+				{% else %}
+					{{ comment.element.title }}
+				{% endif %}
+				</a>
+			</span>
+			<br/>
+			<span class="date">
+				<i>
+					{{ comment.date|date('d-m-Y') }}
+				</i>
+			</span>
+			<br/>
+			<span class="contenu">
+				{{ comment.content }}
+			</span>
+		</div>
+		{% endfor %}
+	</div>
+	{# Fin du block sur les commentaires #}
+
+</div>
+{% endblock container %}

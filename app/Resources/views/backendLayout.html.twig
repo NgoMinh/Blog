@@ -6,9 +6,9 @@
 		<script type="text/javascript" src="{{ asset('backend/js/nav.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('jquery-ui/js/jquery-1.9.1.js')}}"></script>
 		<script type="text/javascript" src="{{ asset('jquery-ui/js/jquery-ui-1.10.3.custom.js')}}"></script>
-		<script type="text/javascript" src="{{ asset('mrdoob/build/three.js')}}"></script>
-		<script type="text/javascript" src="{{ asset('mrdoob/examples/js/controls/OrbitControls.js')}}"></script>
-		<script type="text/javascript" src="{{ asset('mrdoob/examples/js/loaders/ColladaLoader.js')}}"></script>
+		<script type="text/javascript" src="{{ asset('three.js')}}"></script>
+		<script type="text/javascript" src="{{ asset('OrbitControls.js')}}"></script>
+		<script type="text/javascript" src="{{ asset('ColladaLoader.js')}}"></script>
 		<script type="text/javascript" src="{{ asset('ckeditor/ckeditor.js')}}"></script>
 		<script type="text/javascript" src="{{ asset('ckeditor/adapters/jquery.js')}}"></script>
 		<link rel="stylesheet" type="text/css" href="{{ asset('jquery-ui/css/ui-lightness/jquery-ui-1.10.3.custom.css')}}">
@@ -60,7 +60,7 @@
 		</style>
 	</head>
 	<body>
-		{{ render(controller('WnBackendBundle:Backend:Menu')) }}
+		{{ render(controller('WnBackendBundle:Backend:nav')) }}
 		<div class="container">
 		{% block body %}
 		{% endblock %}

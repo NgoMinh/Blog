@@ -94,8 +94,8 @@ class Texture
         {
             $this->tempFilename          = $this->fileName;
             $this->tempFileExtensionName = $this->Extension;
-            $this->fileName      = null;
-            $this->fileExtension = null;
+            $this->fileName              = null;
+            $this->fileExtension         = null;
         }
     }
 

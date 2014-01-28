@@ -18,48 +18,48 @@ class ArticleRepository extends EntityRepository
 
 		$qb->select('a')
 		   ->from('WnBlogBundle:Article', 'a')
-		   ->orderBy('a.datePublication','DESC');
+		   ->orderBy('a.dateOfPublication','DESC');
 
 		return $qb->getQuery()
 				  ->getResult();
 	}
 
-	public function findByCategorie($categorie)
+	public function findByCategory($category)
 	{
 		$qb = $this->_em->createQueryBuilder();
 		$qb->select('a')
 		   ->from('WnBlogBundle:Article', 'a')
-		   ->where('a.categorie = :categorie')
-		    ->setParameter('categorie', $categorie)
-		   ->orderBy('a.datePublication','DESC');
+		   ->where('a.category = :category')
+		    ->setParameter('category', $category)
+		   ->orderBy('a.dateOfPublication','DESC');
 
 	    return $qb->getQuery()
 	              ->getResult();
 	}
 
-	public function findByAuteurAndCategorie($auteur, $categorie)
+	public function findByAuthorAndCategory($author, $category)
 	{
 		$qb = $this->_em->createQueryBuilder();
 		$qb->select('a')
 		   ->from('WnBlogBundle:Article','a')
-		   ->where('a.categorie = :categorie')
-		    ->setParameter('categorie', $categorie)
-		   ->andWhere('a.auteur = :auteur')
-		    ->setParameter('auteur', $auteur)
-		   ->orderBy('a.datePublication','DESC');
+		   ->where('a.category = :category')
+		    ->setParameter('category', $category)
+		   ->andWhere('a.author = :author')
+		    ->setParameter('author', $author)
+		   ->orderBy('a.dateOfPublication','DESC');
 
 		return $qb->getQuery()
 		          ->getResult();
 	}
 
-	public function findLastNStartAtXByCategorie($valueMax, $valueStart, $categorie)
+	public function findLastNStartAtXByCategory($valueMax, $valueStart, $category)
 	{
 		$qb = $this->_em->createQueryBuilder();
 		$qb->select('a')
 		   ->from('WnBlogBundle:Article','a')
-		   ->where('a.categorie = :categorie')
-		    ->setParameter('categorie', $categorie)
-		   ->orderBy('a.datePublication','DESC')
+		   ->where('a.category = :category')
+		    ->setParameter('category', $category)
+		   ->orderBy('a.dateOfPublication','DESC')
 		   ->setFirstResult($valueStart)
 		   ->setMaxResults($valueMax);
 

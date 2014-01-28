@@ -13,7 +13,7 @@ class Model3DConfigType extends Model3DType
         parent::buildForm($builder, $options);
 
         $builder
-            ->remove('nom')
+            ->remove('name')
             ->remove('file')
             ->remove('textures')
             ->add('camDistanceMin' , 'text')

@@ -11,11 +11,11 @@ class Model3DType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom'  , 'text')
-            ->add('file' ,'file')
-            ->add('textures','collection',array('type'         => new TextureType(),
-                                                'allow_add'    => true,
-                                                'allow_delete' => true))
+            ->add('name'     , 'text')
+            ->add('file'     ,'file')
+            ->add('textures' ,'collection',array('type'         => new TextureType(),
+                                                 'allow_add'    => true,
+                                                 'allow_delete' => true))
         ;
     }
 

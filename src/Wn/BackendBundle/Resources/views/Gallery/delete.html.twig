@@ -1,0 +1,12 @@
+{% extends "WnBackendBundle::layout.html.twig" %}
+
+{% block title %}Deleting an image{% endblock title %}
+
+{% block body %}
+<h3>Deleting an image from the main gallery</h3>
+<form method="POST" {{ form_enctype(form)}}>
+	{{ form_widget(form) }}
+	<p>Are you sure you want to delete this picture ?</p>
+	<input type="submit"/>
+</form>
+{% endblock body %}

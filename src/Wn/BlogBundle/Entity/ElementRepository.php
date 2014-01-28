@@ -16,7 +16,7 @@ class ElementRepository extends EntityRepository
 		$qb = $this->_em->createQueryBuilder();
 		$qb->select('e')
 		   ->from('WnBlogBundle:Element','e')
-		   ->orderBy('e.datePublication','DESC');
+		   ->orderBy('e.dateOfPublication','DESC');
 
 		return $qb->getQuery()
 				  ->getResult();
@@ -26,7 +26,7 @@ class ElementRepository extends EntityRepository
 		$qb = $this->_em->createQueryBuilder();
 		$qb->select('e')
 		   ->from('WnBlogBundle:Element','e')
-		   ->orderBy('e.datePublication','DESC')
+		   ->orderBy('e.dateOfPublication','DESC')
 		   ->setMaxResults($value);
 
 		return $qb->getQuery()
@@ -37,7 +37,7 @@ class ElementRepository extends EntityRepository
 		$qb = $this->_em->createQueryBuilder();
 		$qb->select('e')
 		   ->from('WnBlogBundle:Element','e')
-		   ->orderBy('e.datePublication','DESC')
+		   ->orderBy('e.dateOfPublication','DESC')
 		   ->setFirstResult($valueStart)
 		   ->setMaxResults($valueMax);
 

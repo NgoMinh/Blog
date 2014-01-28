@@ -1,7 +1,9 @@
 {% extends "WnBackendBundle::layout.html.twig" %}
-{% block title %}configuration du model 3D{% endblock title %}
+
+{% block title %}camera configuration for the model{% endblock title %}
+
 {% block body %}
-<h3>Configuration de la présentation du model</h3>
+<h3>camera configuration for the model</h3>
 <div class="error"> </div>
 <label for="valeur">Valeur de la distance</label>
 <input type="text" id="valeur">
@@ -106,10 +108,12 @@
 		// Script model 3D
 		var scene    = new THREE.Scene();
 		var camera   = new THREE.PerspectiveCamera(75, 316/400, 0.1, 1000);
-		var renderer = new THREE.WebGLRenderer();
+		var renderer = new THREE.WebGLRenderer({
+													antialias : true
+												});
 		
 		renderer.setSize(316, 400);
-		controls = new THREE.OrbitControls( camera , renderer.domElement );
+		var controls = new THREE.OrbitControls( camera , renderer.domElement );
 		controls.addEventListener( $('.element-model3D'), render );
 		controls.minDistance = parseInt($inputMin.val());
 		controls.maxDistance = parseInt($inputMax.val());

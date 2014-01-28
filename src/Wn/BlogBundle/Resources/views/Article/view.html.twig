@@ -1,0 +1,41 @@
+{% extends "WnBlogBundle::layout.html.twig" %}
+
+{% block nav %}
+	{{ render(controller("WnBlogBundle:Blog:navOnView")) }}
+{% endblock nav %}
+
+{% block container %}
+{% stylesheets '@WnBlogBundle/Resources/public/css/article.css'
+			   '@WnBlogBundle/Resources/public/css/commentaires.css'
+			   '@WnBlogBundle/Resources/public/css/login.css'
+			   '@WnBlogBundle/Resources/public/css/menu.css' %}
+	<link rel="stylesheet" href="{{asset_url}}" />
+{% endstylesheets %}
+<div id="container">
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#container').imagesLoaded(function(){
+				$('#container').masonry({
+					itemSelector : '.element',
+					gutter : 2,
+				});
+				$('#container').masonry('layout');
+			});
+		});
+	</script>
+	<div class="element element-antibug"></div>
+	<div class="article element">
+		<div class="fiche"><span class="text">Article écrit par <a class="auteur" href="{{path('wn_blog_user',{'id':article.author.id})}}"><i>{{article.author.username}}</i></a> le <i>{{ article.dateOfPublication | date('d-m-y')}}</i><span></div>
+		<h1 class="titre">{{ article.title }}</h1>
+		<div class="synopsis">{{ article.synopsis }}</div>
+		<div class="contenu">{{ article.content | raw}}</div>
+		<div class="border-bottom"></div>
+		<div class="border-top"></div>
+	</div><!-- article -->
+	<div class="element description-comments">
+	{{ render(url('wn_blog_comment_view',{'id':article.id})) }}	
+	</div>
+	
+
+</div><!-- container -->
+{% endblock container %}

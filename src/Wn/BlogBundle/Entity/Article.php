@@ -16,15 +16,15 @@ class Article extends Element
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateCreation", type="datetime")
+     * @ORM\Column(name="creationDate", type="datetime")
      */
-    private $dateCreation;
+    private $creationDate;
 
     /**
      * @var string
-     * @ORM\Column(name="titre", type="text")
+     * @ORM\Column(name="title", type="text")
      */
-    private $titre;
+    private $title;
 
     /**
      * @var string
@@ -36,55 +36,54 @@ class Article extends Element
     /**
      * @var string
      *
-     * @ORM\Column(name="contenu", type="text")
+     * @ORM\Column(name="content", type="text")
      */
-    private $contenu;
+    private $content;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="publie", type="boolean")
+     * @ORM\Column(name="publish", type="boolean")
      */
-    private $publie;
+    private $publish;
 
     /**
-     * @ORM\OneToOne(targetEntity="Wn\BlogBundle\Entity\ImageAffiche", cascade={"persist","remove"})
+     * @ORM\OneToOne(targetEntity="Wn\BlogBundle\Entity\Poster", cascade={"persist","remove"})
      */
-    private $imageAffiche;
+    private $poster;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Wn\BlogBundle\Entity\Categorie", inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity="Wn\BlogBundle\Entity\Category", inversedBy="articles")
      */
-    private $categorie;
+    private $category;
 
     public function __construct()
     {
-        $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->dateCreation = new \Datetime;
-        $this->setDatePublication(new \Datetime);
+        $this->creationDate = new \Datetime;
+        $this->setDateOfPublication(new \Datetime);
     }
 
     /**
-     * Set dateCreation
+     * Set creationDate
      *
-     * @param \DateTime $dateCreation
+     * @param \DateTime $creationDate
      * @return Article
      */
-    public function setDateCreation($dateCreation)
+    public function setCreationDate($creationDate)
     {
-        $this->dateCreation = $dateCreation;
+        $this->creationDate = $creationDate;
     
         return $this;
     }
 
     /**
-     * Get dateCreation
+     * Get creationDate
      *
      * @return \DateTime 
      */
-    public function getDateCreation()
+    public function getCreationDate()
     {
-        return $this->dateCreation;
+        return $this->creationDate;
     }
     
     /**
@@ -111,112 +110,112 @@ class Article extends Element
     }
 
     /**
-     * Set contenu
+     * Set content
      *
-     * @param string $contenu
+     * @param string $content
      * @return Article
      */
-    public function setContenu($contenu)
+    public function setContent($content)
     {
-        $this->contenu = $contenu;
+        $this->content = $content;
     
         return $this;
     }
 
     /**
-     * Get contenu
+     * Get content
      *
      * @return string 
      */
-    public function getContenu()
+    public function getContent()
     {
-        return $this->contenu;
+        return $this->content;
     }
 
     /**
-     * Set publie
+     * Set publish
      *
-     * @param boolean $publie
+     * @param boolean $publish
      * @return Article
      */
-    public function setPublie($publie)
+    public function setPublish($publish)
     {
-        $this->publie = $publie;
+        $this->publish = $publish;
     
         return $this;
     }
 
     /**
-     * Get publie
+     * Get publish
      *
      * @return boolean 
      */
-    public function getPublie()
+    public function getPublish()
     {
-        return $this->publie;
+        return $this->publish;
     }
 
     /**
-     * Set titre
+     * Set title
      *
-     * @param string $titre
+     * @param string $title
      * @return Article
      */
-    public function setTitre($titre)
+    public function setTitle($title)
     {
-        $this->titre = $titre;
+        $this->title = $title;
     
         return $this;
     }
 
     /**
-     * Get titre
+     * Get title
      *
      * @return string 
      */
-    public function getTitre()
+    public function getTitle()
     {
-        return $this->titre;
+        return $this->title;
     }
 
-    public function getImageAffiche()
+    public function getPoster()
     {
-        return $this->imageAffiche;
+        return $this->poster;
     }
 
     /**
-     * Set imageAffiche
+     * Set poster
      *
-     * @param \Wn\BlogBundle\Entity\ImageAffiche $imageAffiche
+     * @param \Wn\BlogBundle\Entity\Poster $poster
      * @return Article
      */
-    public function setImageAffiche(\Wn\BlogBundle\Entity\ImageAffiche $imageAffiche = null)
+    public function setPoster(\Wn\BlogBundle\Entity\Poster $poster = null)
     {
-        $this->imageAffiche = $imageAffiche;
+        $this->poster = $poster;
     
         return $this;
     }
 
     /**
-     * Set categorie
+     * Set category
      *
-     * @param \Wn\BlogBundle\Entity\Categorie $categorie
+     * @param \Wn\BlogBundle\Entity\Category $category
      * @return Article
      */
-    public function setCategorie(\Wn\BlogBundle\Entity\Categorie $categorie = null)
+    public function setCategory(\Wn\BlogBundle\Entity\Category $category = null)
     {
-        $this->categorie = $categorie;
+        $this->category = $category;
     
         return $this;
     }
 
     /**
-     * Get categorie
+     * Get category
      *
-     * @return \Wn\BlogBundle\Entity\Categorie 
+     * @return \Wn\BlogBundle\Entity\Category 
      */
-    public function getCategorie()
+    public function getCategory()
     {
-        return $this->categorie;
+        return $this->category;
     }
 }

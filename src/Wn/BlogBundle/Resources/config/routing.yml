@@ -1,21 +1,21 @@
-wn_blog_index:
-    pattern: /index
-    defaults: { _controller: WnBlogBundle:Blog:index }
+wn_blog_homepage:
+    pattern: /homepage
+    defaults: { _controller: WnBlogBundle:Blog:homepage }
 
-wn_blog_index_element:
-    pattern: /index/element
-    defaults: { _controller: WnBlogBundle:Blog:element }
+wn_blog_homepage_element_update:
+    pattern: /homepage/element
+    defaults: { _controller: WnBlogBundle:Blog:updateHomepageElement }
 
-wn_blog_article_voir:
+wn_blog_article_view:
     pattern: /article/{id}
-    defaults: { _controller: WnBlogBundle:Article:voir }
+    defaults: { _controller: WnBlogBundle:Article:view }
     requirements:
         id: \d+
 
-wn_blog_test:
-    pattern: /test
-    defaults: { _controller: WnBlogBundle:Blog:test }
+wn_blog_user:
+    pattern: /profile/{id}
+    defaults: { _controller: WnBlogBundle:Blog:profile }
 
-wn_blog_utilisateur:
-    pattern: /profil/{id}
-    defaults: { _controller: WnBlogBundle:Blog:profil }
+wn_blog_comment_view:
+    pattern : /comment/{id}
+    defaults: { _controller: WnBlogBundle:Comment:viewOnElement }

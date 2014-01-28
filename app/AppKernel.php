@@ -18,7 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Wn\UserBundle\WnUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Wn\GalerieBundle\WnGalerieBundle(),
+            new Wn\GalleryBundle\WnGalleryBundle(),
             new Wn\BackendBundle\WnBackendBundle(),
             new Wn\BlogBundle\WnBlogBundle(),
             new Wn\Model3DBundle\WnModel3DBundle(),

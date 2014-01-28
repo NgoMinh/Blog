@@ -21,7 +21,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 	{
 		//$referer_url = $request->headers->get('referer');
 		//$response    = new RedirectResponse($referer_url);
-		$response    = new RedirectResponse($this->router->generate('wn_blog_index'));
+		$response    = new RedirectResponse($this->router->generate('wn_blog_homepage'));
 		return $response;
 	}
 }

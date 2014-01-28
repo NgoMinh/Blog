@@ -1,0 +1,47 @@
+{% extends "WnBlogBundle::layout.html.twig" %}
+
+{% block css %}
+{{ parent() }}
+{% stylesheets "@WnBlogBundle/Resources/public/css/comment.css"
+			   "@WnGalleryBundle/Resources/public/css/image.css"
+			   "@WnGalleryBundle/Resources/public/css/description.css" %}
+<link rel="stylesheet" type="text/css" href="{{asset_url}}">
+{% endstylesheets %}
+{% endblock css%}
+
+{% block nav %}
+{{ render(controller('WnBlogBundle:Blog:navOnView')) }}
+{% endblock nav %}
+
+{% block container %}
+<div id="container">
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#container').imagesLoaded(function(){
+				$('#container').masonry({
+					itemSelector : '.element',
+					gutter : 2,
+				});
+				$('#container').masonry('layout');
+			});
+		});
+	</script>
+	<div class="element element-antibug"></div>
+	<img class="element element-image" src="{{ asset(image.WebPath) }}">
+
+	<div class="element description-comments">
+		<div class="description">
+			<div class="auteur-date">
+				<span class="icon-user avatar inline"></span>
+				<div class="info inline">
+					<a href="{{path('wn_blog_user',{'id' : image.author.id })}}" class="auteur">{{image.author.username}}</a>
+					<br/>
+					<span class="date">{{image.dateOfPublication | date('d-m-Y')}}</span>
+				</div>
+			</div>
+			<p>Description : {{ image.note }}</p>
+		</div>
+		{{ render(url('wn_blog_comment_view',{'id':image.id})) }}
+	</div>
+</div>
+{% endblock container %}

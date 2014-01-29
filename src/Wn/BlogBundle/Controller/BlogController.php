@@ -15,16 +15,16 @@ class BlogController extends Controller
 	 */
 	public function homepageAction()
 	{
-		$request = Request::createFromGlobals();
-		$request->request->get('category','Blog Perso');
-		$em = $this->getDoctrine()->getManager();
-		                       
+		
+		$em         = $this->getDoctrine()->getManager();
+		$request    = Request::createFromGlobals();
+		$request->request->get('category','Blog Perso');                       
 		$categories = $em->getRepository('WnBlogBundle:Category')
 			             ->findAll();
 
 		$elements   = $em->getRepository('WnBlogBundle:Element')
-		                 ->findLastNStartAtX(3,0);
-
+		                 ->findLastNStartAtX(1,0);
+             
 	 	return $this->render('WnBlogBundle:Blog:homepage.html.twig',array(
 			'categories'  => $categories,
 			'elements'    => $elements,
@@ -45,10 +45,10 @@ class BlogController extends Controller
 		if($category_name == "all"){
 			$elements = $em->getRepository('WnBlogBundle:Element')
 		                   ->findLastNStartAtX($max_element, $start_at);
-		}elseif ($name_categorie == "Gallery") {
+		}elseif ($category_name == "Gallery") {
 			$elements = $em->getRepository('WnGalerieBundle:ElementGallery')
 			               ->findLastNStartAtX($max_element, $start_at);
-		}elseif ($name_categorie == "Model 3D") {
+		}elseif ($category_name == "Model 3D") {
 			$elements = $em->getRepository('WnModel3DBundle:Model3D')
 			               ->findLastNStartAtX($max_element, $start_at);
 		}else{
@@ -103,8 +103,7 @@ class BlogController extends Controller
 			$role = "User";
 		}
 
-		$category_rep         = $em->getRepository('WnBlogBundle:Category');
-
+		$category_rep        = $em->getRepository('WnBlogBundle:Category');
 		$category_event      = $category_rep->myFindByName("Event");
 		$category_chronic    = $category_rep->myFindByName("Chronic");
 		$category_tutorial   = $category_rep->myFindByName("Tutorial");

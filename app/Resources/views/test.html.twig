@@ -1,0 +1,91 @@
+<html>
+	<head>
+		<title>Test</title>
+		<script type="text/javascript" src="{{ asset('js/jquery-1.10.1.js')}}"></script>
+		<script type="text/javascript">
+		$(window).ready(function (){
+			console.log('init : ');
+			showStatus();
+			function sortElemDesc(){
+				$('.element').sort(function ( item1, item2){
+					
+					var $item1 = $(item1);
+					var $item2 = $(item2);
+					
+					var result = $item1.find('time').attr('date-time').localeCompare($item2.find('time').attr('date-time'));
+					console.log('compare : '+ $item1.find('h2').text() +' and '+$item2.find('h2').text()+'      result : '+result);
+					if(result == 1)
+					{
+						$item2.insertAfter($item1);
+					}
+					else if(result == -1)
+					{
+						$item2.insertBefore($item1);
+					}
+					else if(result == 0)
+					{
+						$item2.insertBefore($item1);
+					}
+					showStatus();
+					return result;
+				});
+			}
+			function sortElemAsc(){
+				$('.element').sort(function( item1, item2){
+					var $item1 = $(item1);
+					var $item2 = $(item2);
+					console.log('compare : '+ $item1.find('h2').text() +' and '+$item2.find('h2').text());
+					var result = $item1.find('time').attr('date-time').localeCompare( $item2.find('time').attr('date-time') );
+					if(result == 1)
+					{
+						$item2.insertBefore($item1);
+					}
+					else if(result == -1)
+					{
+						$item1.insertBefore($item2);
+					}
+					else if( result == 0)
+					{
+						$item1.insertBefore($item2);
+					}
+					showStatus();
+					return result;
+				});
+			}
+
+			function showStatus(){
+				var array_state = "";
+				$('.element').each(function(){
+					array_state += $(this).find('h2').text()+" ";
+				});
+				console.log(array_state);
+			}
+
+			//sortElemAsc();
+			sortElemDesc();
+
+		});
+
+		</script>
+	</head>
+	<body>
+		<div class="element">
+			<h2>{{elements[2].id}}²</h2>
+			<time date-time="{{elements[2].dateOfPublication.date}}">{{elements[2].dateOfPublication.date}}</time>
+		</div>
+		<div class="element">
+			<h2>{{elements[0].id}}²</h2>
+			<time date-time="{{elements[0].dateOfPublication.date}}">{{elements[0].dateOfPublication.date}}</time>
+		</div>
+		{% for i in ((elements|length)-1)..0 %}
+			<div class="element">
+				<h2>{{elements[i].id}}</h2>
+				<time date-time="{{elements[i].dateOfPublication.date}}">{{elements[i].dateOfPublication.date}}</time>
+			</div>
+		{% endfor %}
+		<div class="element">
+			<h2>{{elements[1].id}}²</h2>
+			<time date-time="{{elements[1].dateOfPublication.date}}">{{elements[1].dateOfPublication.date}}</time>
+		</div>
+	</body>
+</html>

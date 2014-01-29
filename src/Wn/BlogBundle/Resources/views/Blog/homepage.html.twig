@@ -6,7 +6,8 @@
 	{{parent()}}
 	{% stylesheets "@WnBlogBundle/Resources/public/css/articleHomepage.css"
 				   "@WnModel3DBundle/Resources/public/css/modelHomepage.css"
-				   "@WnGalleryBundle/Resources/public/css/imageHomepage.css" %}
+				   "@WnGalleryBundle/Resources/public/css/imageHomepage.css"
+				   "@WnBlogBundle/Resources/public/css/elementTransition.css" %}
 	<link rel="stylesheet" type="text/css" href="{{asset_url}}">
 	{% endstylesheets %}
 {% endblock css%}
@@ -16,96 +17,99 @@
 $(document).ready(function(){
 	var $content = $('#content');
 
+	//Modified Isotope methods for gutter in masonry
+	$.Isotope.prototype._getMasonryGutterColumns = function() {
+   	 var gutter = this.options.masonry && this.options.masonry.gutterWidth || 0;
+        containerWidth = this.element.width();
+  
+	    this.masonry.columnWidth = this.options.masonry && this.options.masonry.columnWidth ||
+	                  // or use the size of the first item
+	                  this.$filteredAtoms.outerWidth(true) ||
+	                  // if there's no items, use size of container
+	                  containerWidth;
+
+	    this.masonry.columnWidth += gutter;
+
+	    this.masonry.cols = Math.floor( ( containerWidth + gutter ) / this.masonry.columnWidth );
+	    this.masonry.cols = Math.max( this.masonry.cols, 1 );
+  	};
+
+  	$.Isotope.prototype._masonryReset = function() {
+	    // layout-specific props
+	    this.masonry = {};
+	    // FIXME shouldn't have to call this again
+	    this._getMasonryGutterColumns();
+	    var i = this.masonry.cols;
+	    this.masonry.colYs = [];
+	    while (i--) {
+	      this.masonry.colYs.push( 0 );
+	    }
+ 	};
+
+  $.Isotope.prototype._masonryResizeChanged = function() {
+    var prevSegments = this.masonry.cols;
+    // update cols/rows
+    this._getMasonryGutterColumns();
+    // return if updated cols/rows is not equal to previous
+    return ( this.masonry.cols !== prevSegments );
+  };
+	
 	$content.imagesLoaded(function(){
 		var type_element_request = 'all';
 		var element_start_at     = 1;
 		var nb_element_request   = 1;
-		$content.masonry({
+		$content.isotope({
 			itemSelector : '.element',
-			gutter : 2
+			getSortData  : {
+				date : function ( $elem ){
+					return $elem.find('time').attr('date-time');
+				}
+			},
+			masonry      : {
+				gutterWidth : 2
+			}
 		});
-
 
 		var blogLink    = $("nav a:contains('Blog Perso')");
 		var galleryLink = $("nav a:contains('Gallery')");
 		var model3DLink = $("nav a:contains('Model 3D')");
 
-		blogLink.click(function (event){
-			event.preventDefault();
-			type_element_request = 'all';
-			var $elements        = $('.element');
-			$elements.removeClass("element-hide");
-			$content.masonry('layout');
+		$('.filter').click(function (){
+			console.log('ding');
 			updateNav($(this));
-		});
-		
-		galleryLink.click(function (event){
-			event.preventDefault();
-			type_element_request = 'gallery';
-			var $imageElement    = $('.element-image');
-			var $otherElement    = $('.element').not('.element-image').not('.element-antibug');
-			$otherElement.addClass('element-hide');
-			$imageElement.removeClass('element-hide');
-			$content.masonry('layout');
-			updateNav($(this));
-			
-		});
+			var filter = $(this).attr('data-filter');
+			$content.isotope({ filter : filter });
 
-		model3DLink.click(function (event){
-			event.preventDefault();
-			type_element_request = ('Model 3D');
-			var $modelElement    = $('.element-model3D');
-			var $otherElement    = $('.element').not('.element-model3D').not('.element-antibug');
-			$otherElement.addClass('element-hide');
-			$modelElement.removeClass('element-hide');
-			$content.masonry('layout');
-			updateNav($(this));
 		});
 
 		function updateNav(link){
-			$('nav a[class="actif"]').removeClass("actif");
+			$('.filter').removeClass("actif");
 			link.addClass("actif");
 		}
-
-		{% for category in categories %}
-		$("nav a:contains('{{category.name}}')").click(function (event){
-			event.preventDefault();
-			type_element_request = "{{category.name}}";
-			var $categoryElement = $('.category-{{category.name}}');
-			var $otherElement    = $('.element').not('.category-{{category.name}}').not('.element-antibug');
-			$otherElement.addClass('element-hide');
-			$categoryElement.removeClass('element-hide');
-			$content.masonry('layout');
-			updateNav($(this));
-		});
-		{% endfor %}
 
 		$(window).scroll(infiniteScrollEvent);
 
 		function infiniteScrollEvent (){
 			if($(window).scrollTop() + $(window).height() == $(document).height()){
 				$('.loader').css('visibility','visible');
+				var list_id = [];
+				$('.element').not('.element-antibug').each(function (){
+					list_id.push( parseInt($(this).attr('id')) );
+				});
+				console.log(list_id);
 				switch(type_element_request)
 				{
 					case "all":
-						console.log(type_element_request);
-						console.log($('.element').not('.element-antibug').length);
 						element_start_at = $('.element').not('.element-antibug').length;
 						break;
 					case "Gallery":
-						console.log(type_element_request);
-						console.log($('.element-image').length);
 						element_start_at = $('.element-image').length;
 						break;
 					case "Model 3D":
-						console.log(type_element_request);
-						console.log($('.element-model3D').length);
 						element_start_at = $('.element-model3D').length;
 						break;
 					{% for category in categories %}
 					case "{{category.name}}":
-						console.log("{{category.name}}");
-						console.log($('.category-{{category.name}}').length);
 						element_start_at = $('.category-{{category.name}}').length;
 						break;
 					{% endfor %}
@@ -115,9 +119,9 @@ $(document).ready(function(){
 					url: "{{ path('wn_blog_homepage_element_update') }}",
 					cache: false,
 					data: {
-						"category"    : type_element_request,
-						"start_at"    : element_start_at,
-						"max_element" : nb_element_request,
+						'category'    : type_element_request,
+						'start_at'    : element_start_at,
+						'max_element' : nb_element_request
 					},
 					dataType: 'html',
 					beforeSend : function(){
@@ -125,8 +129,7 @@ $(document).ready(function(){
 					},
 					success: function(data){
 						var $html = $( data );
-						$content.append($html).masonry( 'appended', $html, true ).masonry('layout',$html);
-						$content.masonry('layout');
+						$content.append($html).isotope( 'insert', $html);
 						$('.loader').css('visibility','hidden');
 						if(data == ''){
 							console.log('ding');
@@ -142,6 +145,7 @@ $(document).ready(function(){
 			}
 		}
 
+
 		{% if app.request.get('category') is null %}
 			$("nav a:contains('Blog Perso')").trigger('click');
 		{% else %}
@@ -149,7 +153,6 @@ $(document).ready(function(){
 		{% endif %}
 
 		$(window).resize(function(){
-			$content.masonry('layout');
 		});
 	});
 	

@@ -44,4 +44,8 @@ class ElementRepository extends EntityRepository
 		return $qb->getQuery()
 		          ->getResult();
 	}
+
+	public function findForUpdateHomepage($valueMax, $valueStart){
+		
+	}
 }

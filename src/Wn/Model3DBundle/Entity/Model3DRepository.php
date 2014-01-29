@@ -16,7 +16,7 @@ class Model3DRepository extends EntityRepository
 		$qb = $this->_em->createQueryBuilder();
 		$qb->select('m')
 		   ->from('WnModel3DBundle:Model3D','m')
-		   ->orderBy('m.datePublication','DESC')
+		   ->orderBy('m.dateOfPublication','DESC')
 		   ->setFirstResult($valueStart)
 		   ->setMaxResults($valueMax);
 

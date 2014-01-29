@@ -1,7 +1,8 @@
-<div class="element-image element">
+<div class="element-image element" id="{{image.id}}">
 	<a href="{{path('wn_gallery_image_view',{'id': image.id})}}">
 		<img src="{{ asset(image.WebPath) }}"/>
 	</a>
+	<time date-time="{{image.dateOfPublication.date}}"></time>
 	<span class="titre">{{ image.title }}</span>
 	<a href="#" class="commentaire">{{image.comments|length}} <span class="icon-bubble"></span></a>
 </div><!-- element-image -->

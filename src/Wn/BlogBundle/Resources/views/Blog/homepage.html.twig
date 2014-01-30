@@ -57,7 +57,7 @@ $(document).ready(function(){
 	$content.imagesLoaded(function(){
 		var type_element_request = 'all';
 		var element_start_at     = 1;
-		var nb_element_request   = 1;
+		var nb_element_request   = 2;
 		$content.isotope({
 			itemSelector : '.element',
 			getSortData  : {
@@ -70,16 +70,16 @@ $(document).ready(function(){
 			}
 		});
 
-		var blogLink    = $("nav a:contains('Blog Perso')");
-		var galleryLink = $("nav a:contains('Gallery')");
-		var model3DLink = $("nav a:contains('Model 3D')");
-
 		$('.filter').click(function (){
 			console.log('ding');
 			updateNav($(this));
 			var filter = $(this).attr('data-filter');
-			$content.isotope({ filter : filter });
-
+			type_element_request = $(this).attr('element-type');
+			$content.isotope({
+				filter        : filter,
+				sortBy        : 'date',
+				sortAscending : false
+			});
 		});
 
 		function updateNav(link){
@@ -97,23 +97,7 @@ $(document).ready(function(){
 					list_id.push( parseInt($(this).attr('id')) );
 				});
 				console.log(list_id);
-				switch(type_element_request)
-				{
-					case "all":
-						element_start_at = $('.element').not('.element-antibug').length;
-						break;
-					case "Gallery":
-						element_start_at = $('.element-image').length;
-						break;
-					case "Model 3D":
-						element_start_at = $('.element-model3D').length;
-						break;
-					{% for category in categories %}
-					case "{{category.name}}":
-						element_start_at = $('.category-{{category.name}}').length;
-						break;
-					{% endfor %}
-				}
+				console.log(type_element_request);
 				$.ajax({
 					type: "POST",
 					url: "{{ path('wn_blog_homepage_element_update') }}",
@@ -121,7 +105,8 @@ $(document).ready(function(){
 					data: {
 						'category'    : type_element_request,
 						'start_at'    : element_start_at,
-						'max_element' : nb_element_request
+						'max_element' : nb_element_request,
+						'list_id'     : list_id
 					},
 					dataType: 'html',
 					beforeSend : function(){
@@ -130,6 +115,10 @@ $(document).ready(function(){
 					success: function(data){
 						var $html = $( data );
 						$content.append($html).isotope( 'insert', $html);
+						$content.isotope({
+							sortBy        : 'date',
+							sortAscending : false
+						});
 						$('.loader').css('visibility','hidden');
 						if(data == ''){
 							console.log('ding');

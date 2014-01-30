@@ -40,22 +40,23 @@ class BlogController extends Controller
 		$category_name    = $request->request->get('category');
 		$start_at         = $request->request->get('start_at');
 		$max_element      = $request->request->get('max_element');
+		$list_id          = $request->request->get('list_id');
 
 		$elements = array();
 		if($category_name == "all"){
 			$elements = $em->getRepository('WnBlogBundle:Element')
-		                   ->findLastNStartAtX($max_element, $start_at);
-		}elseif ($category_name == "Gallery") {
-			$elements = $em->getRepository('WnGalerieBundle:ElementGallery')
-			               ->findLastNStartAtX($max_element, $start_at);
-		}elseif ($category_name == "Model 3D") {
+		                   ->findForUpdateHomepage($max_element, $list_id);
+		}elseif ($category_name == "image") {
+			$elements = $em->getRepository('WnGalleryBundle:ImageGallery')
+			               ->findForUpdateHomepage($max_element, $list_id);
+		}elseif ($category_name == "model") {
 			$elements = $em->getRepository('WnModel3DBundle:Model3D')
-			               ->findLastNStartAtX($max_element, $start_at);
+			               ->findForUpdateHomepage($max_element, $list_id);
 		}else{
 			$category = $em->getRepository('WnBlogBundle:Category')
 			                ->findByName($category_name);
 			$elements = $em->getRepository('WnBlogBundle:Article')
-			                ->findLastNStartAtXByCategory($max_element, $start_at, $category);
+			                ->findForUpdateHomepage($max_element, $list_id, $category);
 		}
 		
 

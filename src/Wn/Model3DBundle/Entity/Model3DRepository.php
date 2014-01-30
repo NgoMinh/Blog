@@ -23,4 +23,17 @@ class Model3DRepository extends EntityRepository
 		return $qb->getQuery()
 		          ->getResult();
 	}
+
+	public function findForUpdateHomepage($max_result, $list_id){
+		$qb = $this->_em->createQueryBuilder();
+		$qb->select('m')
+		   ->from('WnModel3DBundle:Model3D','m')
+		   ->where('m.id NOT IN (:ids)')
+		    ->setParameter('ids',$list_id)
+		   ->orderBy('m.dateOfPublication','DESC')
+		   ->setMaxResults($max_result);
+
+		return $qb->getQuery()
+		          ->getResult();
+	}
 }

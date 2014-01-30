@@ -23,4 +23,17 @@ class ImageGalleryRepository extends EntityRepository
 		return $qb->getQuery()
 		          ->getResult();
 	}
+
+	public function findForUpdateHomepage($max_result, $list_id){
+		$qb = $this->_em->createQueryBuilder();
+		$qb->select('i')
+		   ->from('WnGalleryBundle:ImageGallery','i')
+		   ->where('i.id NOT IN (:ids)')
+		    ->setParameter('ids',$list_id)
+		   ->orderBy('i.dateOfPublication','DESC')
+		   ->setMaxResults($max_result);
+
+		return $qb->getQuery()
+		          ->getResult();
+	}
 }

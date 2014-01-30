@@ -52,7 +52,7 @@ nav ul li a{
 		color 1s ease;
 }
 
-nav ul li a[class="actif"]{
+nav ul li .actif{
 	color : #202D39;
 	transition:
 		color 1s ease;

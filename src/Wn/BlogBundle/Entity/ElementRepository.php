@@ -44,4 +44,17 @@ class ElementRepository extends EntityRepository
 		return $qb->getQuery()
 		          ->getResult();
 	}
+
+	public function findForUpdateHomepage($max_result, $list_id){
+		$qb = $this->_em->createQueryBuilder();
+		$qb->select('e')
+		   ->from('WnBlogBundle:Element','e')
+		   ->where('e.id NOT IN (:ids)')
+		    ->setParameter('ids',$list_id)
+		   ->orderBy('e.dateOfPublication','DESC')
+		   ->setMaxResults($max_result);
+
+		return $qb->getQuery()
+		          ->getResult();
+	}
 }

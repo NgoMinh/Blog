@@ -1,8 +1,9 @@
 {% javascripts "@WnModel3DBundle/Resources/public/js/ElementModel3D.js"%}
 	<script type="text/javascript" src="{{ asset_url}}"></script>
 {% endjavascripts %}
-<div class="element element-model3D">
+<div class="element element-model3D" id="{{model.id}}">
 	<div class="slider" id="sliderCamDistance-{{model.id}}"></div>
+	<time date-time="{{model.dateOfPublication.date}}"></time>
 	<div id="renderModel-{{model.id}}"><a class="link-view" href="{{ path('wn_model3D_view',{'id':model.id}) }}"><span class="icon-expand"></span></a></div>
 	<script type="text/javascript">
 		$(document).ready(function(){

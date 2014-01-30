@@ -66,4 +66,19 @@ class ArticleRepository extends EntityRepository
 		return $qb->getQuery()
 		          ->getResult();
 	}
+
+	public function findForUpdateHomepage($max_result, $list_id, $category){
+		$qb = $this->_em->createQueryBuilder();
+		$qb->select('a')
+		   ->from('WnBlogBundle:Article','a')
+		   ->where('a.id NOT IN (:ids)')
+		    ->setParameter('ids',$list_id)
+		   ->andWhere('a.category = :category')
+		    ->setParameter('category', $category)
+		   ->orderBy('a.dateOfPublication','DESC')
+		   ->setMaxResults($max_result);
+
+		return $qb->getQuery()
+		          ->getResult();
+	}
 }

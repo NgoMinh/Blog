@@ -51,11 +51,56 @@ class CommentController extends Controller
 			'form'         => $form->createView(),
 			'comments'     => $comments,
 			'comment'      => $comment
-		));
+			));
 	}
 
 	public function censorAction(comment $comment){
-		return $this->render('WnBackendBundle:Comment:censor.html.twig');
+		$form    = $this->createFormBuilder()->getForm();
+		$request = $this->getRequest();
+		
+		if($request->getMethod() == 'POST')
+		{
+			$form->bind($request);
+			if($form->isValid())
+			{
+				$em = $this->getDoctrine()->getManager();
+				$comment->setCensored(true);
+				$em->persist($comment);
+				$em->flush();
+
+				return $this->redirect($this->generateUrl('wn_backend_comment'));
+			}
+		}
+
+		return $this->render('WnBackendBundle:Comment:censor.html.twig',array(
+			'form'    => $form->createView(),
+			'comment' => $comment
+			));
+	}
+
+	public function uncensorAction(comment $comment)
+	{
+		$form    = $this->createFormBuilder()->getForm();
+		$request = $this->getRequest();
+
+		if($request->getMethod() == 'POST')
+		{
+			$form->bind($request);
+			if($form->isValid())
+			{
+				$em = $this->getDoctrine()->getManager();
+				$comment->setCensored(false);
+				$em->persist($comment);
+				$em->flush();
+
+				return $this->redirect($this->generateUrl('wn_backend_comment'));
+			}
+		}
+
+		return $this->render('WnBackendBundle:Comment:uncensor.html.twig', array(
+			'form'    => $form->createView(),
+			'comment' => $comment
+		));
 	}
 
 	public function deleteAction(comment $comment){

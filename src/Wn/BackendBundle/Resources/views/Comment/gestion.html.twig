@@ -48,7 +48,7 @@
 				<td><a href="{{ path('wn_backend_comment_uncensor', {'id': comment.id}) }}">uncensor</a></td>
 			{% else %}
 				<td>no</td>
-				<td><a href="{{ path('wn_backend_comment_censor', {'id': comment.id})}}">censor</a></td>
+				<td><a href="{{ path('wn_backend_comment_censor', {'id': comment.id})   }}">censor</a></td>
 			{% endif %}
 		</tr>
 	{% endfor %}

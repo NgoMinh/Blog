@@ -1,0 +1,15 @@
+{% extends "WnBackendBundle::layout.html.twig" %}
+{% block title %}Uncensor comment{% endblock %}
+{% block body %}
+<h3></h3>
+<p>Are you sure to uncensor this comment ?</p>
+<div class="comment">
+	<div class="element">{{ comment.element.title   }}</div>
+	<div class="author" >{{ comment.author.username }}</div>
+	<div class="content">{{ comment.content         }}</div>
+</div>
+<form method="POST" {{ form_enctype(form) }}>
+	{{ form_widget(form) }}
+	<input type="submit" value="yes">
+</form>
+{% endblock body %}

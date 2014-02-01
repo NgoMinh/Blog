@@ -15,7 +15,11 @@ wn_blog_article_view:
 wn_blog_user:
     pattern: /profile/{id}
     defaults: { _controller: WnBlogBundle:Blog:profile }
+    requirements:
+        id: \d+
 
 wn_blog_comment_view:
     pattern : /comment/{id}
     defaults: { _controller: WnBlogBundle:Comment:viewOnElement }
+    requirements:
+        id: \d+

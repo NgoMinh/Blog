@@ -30,9 +30,15 @@ wn_backend_comment:
     pattern: /comment
     defaults: { _controller: WnBackendBundle:Backend:comment }
 
-wn_backend_comment_censurer:
-    pattern: /comment/censurer/{id}
-    defaults: { _controller: WnBlogBundle:Comment:censurer }
+wn_backend_comment_censor:
+    pattern: /comment/censor/{id}
+    defaults: { _controller: WnBlogBundle:Comment:censor }
+    requirements:
+        id: \d+
+
+wn_backend_comment_uncensor:
+    pattern: /comment/uncensor/{id}
+    defaults: { _controller: WnBlogBundle:Comment:uncensor }
     requirements:
         id: \d+
 

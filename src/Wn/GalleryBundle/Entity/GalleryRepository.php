@@ -12,6 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class GalleryRepository extends EntityRepository
 {
+	/**
+	 * @param  string $name Name of the picture
+	 * @return result
+	 */
 	public function findByName($name){
 		$query_builder = $this->createQueryBuilder('g')
 							  ->where('g.name = :name')

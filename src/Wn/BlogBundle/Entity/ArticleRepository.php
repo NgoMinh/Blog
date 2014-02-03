@@ -12,37 +12,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class ArticleRepository extends EntityRepository
 {
-	/**
-	 * @return result
-	 */
-	public function myFindAllOrderByDate()
-	{
-		$qb = $this->_em->createQueryBuilder();
-
-		$qb->select('a')
-		   ->from('WnBlogBundle:Article', 'a')
-		   ->orderBy('a.dateOfPublication','DESC');
-
-		return $qb->getQuery()
-				  ->getResult();
-	}
-
-	/**
-	 * @param  WnBlogBundle/Entity/Category $category
-	 * @return result
-	 */
-	public function findByCategory($category)
-	{
-		$qb = $this->_em->createQueryBuilder();
-		$qb->select('a')
-		   ->from('WnBlogBundle:Article', 'a')
-		   ->where('a.category = :category')
-		    ->setParameter('category', $category)
-		   ->orderBy('a.dateOfPublication','DESC');
-
-	    return $qb->getQuery()
-	              ->getResult();
-	}
 
 	/**
 	 * Used for the profile of an author

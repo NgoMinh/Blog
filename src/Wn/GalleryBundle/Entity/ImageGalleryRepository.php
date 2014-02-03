@@ -12,18 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class ImageGalleryRepository extends EntityRepository
 {
-	public function findLastNStartAtX($valueMax, $valueStart){
-		$qb = $this->_em->createQueryBuilder();
-		$qb->select('e')
-		   ->from('WnGalleryBundle:ElementGallery','e')
-		   ->orderBy('e.datePublication','DESC')
-		   ->setFirstResult($valueStart)
-		   ->setMaxResults($valueMax);
-
-		return $qb->getQuery()
-		          ->getResult();
-	}
-
+	/**
+	 * Used for adding new image in the homepage
+	 * 
+	 * @param integer        $max_result Number of image required
+	 * @param array<integer> $list_id    List of id image already display on the homepage
+ 	 */
 	public function findForUpdateHomepage($max_result, $list_id){
 		$qb = $this->_em->createQueryBuilder();
 		$qb->select('i')

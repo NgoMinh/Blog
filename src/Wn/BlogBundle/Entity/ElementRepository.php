@@ -12,34 +12,40 @@ use Doctrine\ORM\EntityRepository;
  */
 class ElementRepository extends EntityRepository
 {
-	public function myFindAllOrderByDate(){
-		$qb = $this->_em->createQueryBuilder();
-		$qb->select('e')
-		   ->from('WnBlogBundle:Element','e')
-		   ->orderBy('e.dateOfPublication','DESC');
-
-		return $qb->getQuery()
-				  ->getResult();
-	}
-
-	public function findLastN($value){
+	/**
+	 * Find the last N element
+	 * Used for Init the homepage
+	 *
+	 * @param  interger $max_result Number of element required
+	 * @return result
+	 */
+	public function findLastN($max_result){
 		$qb = $this->_em->createQueryBuilder();
 		$qb->select('e')
 		   ->from('WnBlogBundle:Element','e')
 		   ->orderBy('e.dateOfPublication','DESC')
-		   ->setMaxResults($value);
+		   ->setMaxResults($max_result);
 
 		return $qb->getQuery()
 		          ->getResult();
 	}
 
-	public function findLastNStartAtX($valueMax, $valueStart){
+	/**
+	 * Find the elements that are not already display in the homepage
+	 * Used for adding element in the homepage
+	 *
+	 * @param  integer         $max_result   Number of element required
+	 * @param  array<integer>  $list_id      List of element id that are already display
+	 * @return result
+	 */
+	public function findForUpdateHomepage($max_result, $list_id){
 		$qb = $this->_em->createQueryBuilder();
 		$qb->select('e')
 		   ->from('WnBlogBundle:Element','e')
+		   ->where('e.id NOT IN (:ids)')
+		    ->setParameter('ids',$list_id)
 		   ->orderBy('e.dateOfPublication','DESC')
-		   ->setFirstResult($valueStart)
-		   ->setMaxResults($valueMax);
+		   ->setMaxResults($max_result);
 
 		return $qb->getQuery()
 		          ->getResult();

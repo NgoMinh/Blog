@@ -12,13 +12,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class Model3DRepository extends EntityRepository
 {
-	public function findLastNStartAtX($valueMax, $valueStart){
+	/**
+	 * Used for adding model 3D in the homepage
+	 *
+	 * @param  integer        $max_result Number of model required
+	 * @param  array<integer> $list_id    List of id model already display in the homepage
+	 * @return result
+	 */
+	public function findForUpdateHomepage($max_result, $list_id){
 		$qb = $this->_em->createQueryBuilder();
 		$qb->select('m')
 		   ->from('WnModel3DBundle:Model3D','m')
-		   ->orderBy('m.datePublication','DESC')
-		   ->setFirstResult($valueStart)
-		   ->setMaxResults($valueMax);
+		   ->where('m.id NOT IN (:ids)')
+		    ->setParameter('ids',$list_id)
+		   ->orderBy('m.dateOfPublication','DESC')
+		   ->setMaxResults($max_result);
 
 		return $qb->getQuery()
 		          ->getResult();

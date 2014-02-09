@@ -158,6 +158,11 @@
 	font-weight : 400;
 }
 
+.commentaire .contenu .censur{
+	color       : #9C9F8E;
+	font-weight : 600; 
+}
+
 @media screen
 and (max-width : 623px){ /* 190+2+310+2+310+2 */
   /* Styles */

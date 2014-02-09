@@ -11,6 +11,7 @@
 			<th>Author</th>
 			<th>Content</th>
 			<th>Date</th>
+			<th>Location</th>
 			<th>Censored</th>
 		</tr>
 	</thead>
@@ -21,14 +22,34 @@
 			<td>{{ comment.author.username }}</td>
 			<td>{{ comment.content }}</td>
 			<td>{{ comment.date | date('d-m-Y')}}</td>
+			
+			{% if comment.element is wn_article %}
 			<td>
-				{% if comment.censored %}
-					yes
-				{% else %}
-					no
-				{% endif %}
+				<a href="{{ path('wn_blog_article_view',{'id': comment.element.id }) }}">
+					{{ comment.element.title }}
+				</a>
 			</td>
-			<td><a href="#">censored</a></td>
+			{% elseif comment.element is wn_imageGallery %}
+			<td>
+				<a href="{{ path('wn_gallery_image_view',{'id':comment.element.id }) }}">
+					{{ comment.element.title }}
+				</a>
+			</td>
+			{% elseif comment.element is wn_model3d %}
+			<td>
+				<a href="{{ path('wn_model3D_view',{'id':comment.element.id }) }}">
+					{{ comment.element.name }}
+				</a>
+			</td>
+			{% endif %}
+
+			{% if comment.censored %}
+				<td>yes</td>
+				<td><a href="{{ path('wn_backend_comment_uncensor', {'id': comment.id}) }}">uncensor</a></td>
+			{% else %}
+				<td>no</td>
+				<td><a href="{{ path('wn_backend_comment_censor', {'id': comment.id})   }}">censor</a></td>
+			{% endif %}
 		</tr>
 	{% endfor %}
 	</tbody>

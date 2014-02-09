@@ -5,7 +5,7 @@
 		{{ render(controller("WnBlogBundle:Article:viewOnHomepage", {'article' : element })) }}
 	{# Representation des images de la galerie #}
 	{% elseif element is wn_imageGallery %}
-		{{ render(controller("WnGalerieBundle:ElementGalerie:viewOnHomepage", {'elementGalerie' : element })) }}
+		{{ render(controller("WnGalleryBundle:ImageGallery:viewOnHomepage", {'image' : element })) }}
 	{# Representation des model3D#}
 	{% elseif element is wn_model3d %}
 		{{ render(controller("WnModel3DBundle:Model3D:viewOnHomepage",{'model': element })) }}

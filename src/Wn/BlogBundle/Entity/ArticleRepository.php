@@ -12,31 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class ArticleRepository extends EntityRepository
 {
-	public function myFindAllOrderByDate()
-	{
-		$qb = $this->_em->createQueryBuilder();
 
-		$qb->select('a')
-		   ->from('WnBlogBundle:Article', 'a')
-		   ->orderBy('a.dateOfPublication','DESC');
-
-		return $qb->getQuery()
-				  ->getResult();
-	}
-
-	public function findByCategory($category)
-	{
-		$qb = $this->_em->createQueryBuilder();
-		$qb->select('a')
-		   ->from('WnBlogBundle:Article', 'a')
-		   ->where('a.category = :category')
-		    ->setParameter('category', $category)
-		   ->orderBy('a.dateOfPublication','DESC');
-
-	    return $qb->getQuery()
-	              ->getResult();
-	}
-
+	/**
+	 * Used for the profile of an author
+	 *
+	 * @param  WnUserBundle/Entity/User     $author
+	 * @param  WnBlogBundle/Entity/Category $category
+	 * @return result
+	 */
 	public function findByAuthorAndCategory($author, $category)
 	{
 		$qb = $this->_em->createQueryBuilder();
@@ -52,16 +35,25 @@ class ArticleRepository extends EntityRepository
 		          ->getResult();
 	}
 
-	public function findLastNStartAtXByCategory($valueMax, $valueStart, $category)
-	{
+	/**
+	 * find N articles by his category and not display in the homepage
+	 * used for adding articles in the homepage 
+	 *
+	 * @param  integer                        $max_result 
+	 * @param  array<interger>                $list_id
+	 * @param  WnBlogBundle/Entity/Category   $category
+	 * @return result
+	 */
+	public function findForUpdateHomepage($max_result, $list_id, $category){
 		$qb = $this->_em->createQueryBuilder();
 		$qb->select('a')
 		   ->from('WnBlogBundle:Article','a')
-		   ->where('a.category = :category')
+		   ->where('a.id NOT IN (:ids)')
+		    ->setParameter('ids',$list_id)
+		   ->andWhere('a.category = :category')
 		    ->setParameter('category', $category)
 		   ->orderBy('a.dateOfPublication','DESC')
-		   ->setFirstResult($valueStart)
-		   ->setMaxResults($valueMax);
+		   ->setMaxResults($max_result);
 
 		return $qb->getQuery()
 		          ->getResult();

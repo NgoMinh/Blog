@@ -1,4 +1,4 @@
-<div class="element element-article category-{{ article.category.name }}">
+<div class="element element-article category-{{ article.category.name }}" id="{{article.id}}">
 
 	<div class="segment-top">
 		<div class="categorie">{{ article.category.name }}</div>
@@ -11,7 +11,9 @@
 	<div class="segment-bottom">
 		<div class="date-auteur">
 			<div class="date">
-				{{ article.dateOfPublication | date('d / m / Y',"Europe/Paris") }}
+				<time date-time="{{article.dateOfPublication.date}}">
+					{{ article.dateOfPublication | date('d / m / Y',"Europe/Paris") }}
+				</time>
 			</div><!-- date-auteur -->
 			<div class="auteur">
 				écrie par {{ article.author.username }}

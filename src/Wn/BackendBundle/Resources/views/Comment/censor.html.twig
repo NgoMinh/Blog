@@ -1,0 +1,16 @@
+{% extends "WnBackendBundle::layout.html.twig" %}
+
+{% block title %}Censor comment{% endblock title %}
+
+{% block body %}
+<p>Are you sure you want to censor this comment ?</p>
+<div class="comment">
+	<div class="element">{{ comment.element.title   }}</div>
+	<div class="author" >{{ comment.author.username }}</div>
+	<div class="content">{{ comment.content         }}</div>
+</div>
+<form method="POST" {{ form_enctype(form)}}>
+	{{ form_widget(form) }}
+	<input type="submit" value="yes">
+</form>
+{% endblock body %}

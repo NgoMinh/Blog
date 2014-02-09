@@ -15,16 +15,16 @@ class BlogController extends Controller
 	 */
 	public function homepageAction()
 	{
-		$request = Request::createFromGlobals();
-		$request->request->get('category','Blog Perso');
-		$em = $this->getDoctrine()->getManager();
-		                       
+		
+		$em         = $this->getDoctrine()->getManager();
+		$request    = Request::createFromGlobals();
+		$request->request->get('category','Blog Perso');                       
 		$categories = $em->getRepository('WnBlogBundle:Category')
 			             ->findAll();
 
 		$elements   = $em->getRepository('WnBlogBundle:Element')
-		                 ->findLastNStartAtX(3,0);
-
+		                 ->findLastNStartAtX(1,0);
+             
 	 	return $this->render('WnBlogBundle:Blog:homepage.html.twig',array(
 			'categories'  => $categories,
 			'elements'    => $elements,
@@ -40,22 +40,23 @@ class BlogController extends Controller
 		$category_name    = $request->request->get('category');
 		$start_at         = $request->request->get('start_at');
 		$max_element      = $request->request->get('max_element');
+		$list_id          = $request->request->get('list_id');
 
 		$elements = array();
 		if($category_name == "all"){
 			$elements = $em->getRepository('WnBlogBundle:Element')
-		                   ->findLastNStartAtX($max_element, $start_at);
-		}elseif ($name_categorie == "Gallery") {
-			$elements = $em->getRepository('WnGalerieBundle:ElementGallery')
-			               ->findLastNStartAtX($max_element, $start_at);
-		}elseif ($name_categorie == "Model 3D") {
+		                   ->findForUpdateHomepage($max_element, $list_id);
+		}elseif ($category_name == "image") {
+			$elements = $em->getRepository('WnGalleryBundle:ImageGallery')
+			               ->findForUpdateHomepage($max_element, $list_id);
+		}elseif ($category_name == "model") {
 			$elements = $em->getRepository('WnModel3DBundle:Model3D')
-			               ->findLastNStartAtX($max_element, $start_at);
+			               ->findForUpdateHomepage($max_element, $list_id);
 		}else{
 			$category = $em->getRepository('WnBlogBundle:Category')
 			                ->findByName($category_name);
 			$elements = $em->getRepository('WnBlogBundle:Article')
-			                ->findLastNStartAtXByCategory($max_element, $start_at, $category);
+			                ->findForUpdateHomepage($max_element, $list_id, $category);
 		}
 		
 
@@ -103,8 +104,7 @@ class BlogController extends Controller
 			$role = "User";
 		}
 
-		$category_rep         = $em->getRepository('WnBlogBundle:Category');
-
+		$category_rep        = $em->getRepository('WnBlogBundle:Category');
 		$category_event      = $category_rep->myFindByName("Event");
 		$category_chronic    = $category_rep->myFindByName("Chronic");
 		$category_tutorial   = $category_rep->myFindByName("Tutorial");

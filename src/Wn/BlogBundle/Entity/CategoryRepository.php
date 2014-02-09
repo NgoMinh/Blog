@@ -12,6 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+	/**
+	 * Find a category by his name
+	 * 
+	 * @param  string $name
+	 * @return result
+	 */
 	public function myFindByName($name){
 		$qb = $this->_em->createQueryBuilder();
 

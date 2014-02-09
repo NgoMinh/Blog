@@ -77,12 +77,12 @@
 </div>
 <nav class="navigation">
 	<ul class="list-menu">
-		<li class="menu"><a href="#" class="actif">Blog Perso</a></li>
+		<li class="menu"><a href="#" class="actif filter" data-filter=".element" element-type="all">Blog Perso</a></li>
 		{% for category in categories %}
-			<li class="menu"><a href="#" >{{ category.name }}</a></li>
+		<li class="menu"><a href="#" class="filter" data-filter=".category-{{category.name}}" element-type="{{category.name}}">{{ category.name }}</a></li>
 		{% endfor %}
-		<li class="menu"><a href="#" >Gallery</a></li>
-		<li class="menu"><a href="#" >Model 3D</a></li>
+		<li class="menu"><a href="#" class="filter" data-filter=".element-image" element-type="image">Gallery</a></li>
+		<li class="menu"><a href="#" class="filter" data-filter=".element-model3D" element-type="model">Model 3D</a></li>
 		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 			<li class="menu"><a href="{{ path('fos_user_security_logout')}}">Logout</a></li>
 		{% else %}

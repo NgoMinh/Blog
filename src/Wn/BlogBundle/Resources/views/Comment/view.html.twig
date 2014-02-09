@@ -34,7 +34,13 @@
 			<a href="{{ path('wn_blog_user',{'id':comment.author.id}) }}" class="pseudo">{{ comment.author.username }}</a>
 		</div>
 		<div class="contenu">
+
+			{% if comment.censored %}
+			<p class="censur"> This comment was censored by a moderator</p>
+			{% else %}
 			<p>{{ comment.content }}</p>
+			{% endif %}
+
 		</div>
 	</div><!-- commentaire -->
 	{% endfor %}
